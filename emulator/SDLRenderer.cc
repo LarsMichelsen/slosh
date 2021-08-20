@@ -5,9 +5,9 @@ SDLRenderer::SDLRenderer(uint16_t width, uint16_t height) {
     SDL_Init(SDL_INIT_VIDEO);
     
     _window = SDL_CreateWindow(
-      "SDL2Test",
-      SDL_WINDOWPOS_UNDEFINED,
-      SDL_WINDOWPOS_UNDEFINED,
+      "Emulator",
+      SDL_WINDOWPOS_CENTERED,
+      50,
       width,
       height,
       0
@@ -28,6 +28,7 @@ void SDLRenderer::clear() {
 void SDLRenderer::show() {
 
     this->handle_events();
+    this->render_leds();
     SDL_RenderPresent(_renderer);
 }
 
@@ -57,3 +58,22 @@ void SDLRenderer::handle_events() {
         }
     }
 }
+
+void SDLRenderer::render_leds() {
+    int width, height;
+    SDL_GetWindowSize(_window, &width, &height);
+
+    SDL_Rect rect;
+    rect.y = 25;
+    rect.w = width / NUM_LEDS;
+    rect.h = width / NUM_LEDS;
+    for (uint16_t i = 0; i < NUM_LEDS; i++) {
+        if (_leds[i].r == 0 && _leds[i].g == 0 && _leds[i].b == 0)
+            continue;
+
+        rect.x = 25 + rect.w * i;
+        SDL_SetRenderDrawColor(_renderer, _leds[i].r, _leds[i].g, _leds[i].b, 150);
+        SDL_RenderFillRect(_renderer, &rect);
+    }
+}
+

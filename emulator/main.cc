@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 {
     signal(SIGINT, sigHandler);
 
-    SDLRenderer renderer(80, 2000);
+    SDLRenderer renderer(3500, 60);
     Game game(&renderer);
 
     while (true) {

@@ -14,7 +14,7 @@ struct RGB {
 // It's task is to display the state of the game.
 class Renderer {
     public:
-        RGB leds[NUM_LEDS];
+        RGB _leds[NUM_LEDS] = {0, 0, 0};
         virtual void clear() = 0;
         virtual void show() = 0;
 };
