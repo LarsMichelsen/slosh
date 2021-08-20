@@ -1,3 +1,7 @@
+#pragma once
+
+#include <stdint.h>
+
 const int NUM_LEDS = 576;
 
 struct RGB {

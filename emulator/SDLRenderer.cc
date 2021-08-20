@@ -1,3 +1,4 @@
+#include <iostream>
 #include "SDLRenderer.h"
 
 SDLRenderer::SDLRenderer(uint16_t width, uint16_t height) {
@@ -17,7 +18,6 @@ SDLRenderer::SDLRenderer(uint16_t width, uint16_t height) {
 
 SDLRenderer::~SDLRenderer() {
     SDL_DestroyWindow(_window);
-    SDL_Quit();
 }
 
 void SDLRenderer::clear() {
@@ -26,5 +26,34 @@ void SDLRenderer::clear() {
 }
 
 void SDLRenderer::show() {
+
+    this->handle_events();
     SDL_RenderPresent(_renderer);
+}
+
+void SDLRenderer::handle_events() {
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        switch (event.type)
+        {
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym) {
+                    case SDLK_ESCAPE:
+                        exit(0);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case SDL_WINDOWEVENT:
+                switch (event.window.event) {
+                    case SDL_WINDOWEVENT_CLOSE:
+                        exit(0);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+        }
+    }
 }
