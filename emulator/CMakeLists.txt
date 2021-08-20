@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.7)
+project(emulator)
+
+find_package(SDL2 REQUIRED)
+include_directories(emulator ${SDL2_INCLUDE_DIRS})
+
+# Directly include the common components into this cmake application
+add_library(common
+    ../common/Renderer.h
+)
+set_target_properties(common PROPERTIES LINKER_LANGUAGE CXX)
+target_include_directories(common PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
+
+add_executable(emulator
+    main.cc
+    SDLRenderer.cc
+)
+
+target_link_libraries(emulator common ${SDL2_LIBRARIES})
