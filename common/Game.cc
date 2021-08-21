@@ -1,4 +1,4 @@
-#include  "Game.h"
+#include "Game.h"
 
 Game::Game(Renderer *renderer, Input *input) {
     _input = input;
@@ -7,9 +7,7 @@ Game::Game(Renderer *renderer, Input *input) {
     _player->spawn();
 }
 
-Game::~Game() {
-    delete _player;
-}
+Game::~Game() { delete _player; }
 
 void Game::tick() {
     // Phase 1: Update the game logic.

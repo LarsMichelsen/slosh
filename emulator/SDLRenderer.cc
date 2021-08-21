@@ -1,24 +1,17 @@
-#include <iostream>
 #include "SDLRenderer.h"
+
+#include <iostream>
 
 SDLRenderer::SDLRenderer(uint16_t width, uint16_t height) {
     SDL_Init(SDL_INIT_VIDEO);
-    
-    _window = SDL_CreateWindow(
-      "Emulator",
-      SDL_WINDOWPOS_CENTERED,
-      50,
-      width,
-      height,
-      0
-    );
-    
+
+    _window = SDL_CreateWindow("Emulator", SDL_WINDOWPOS_CENTERED, 50, width,
+                               height, 0);
+
     _renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_SOFTWARE);
 }
 
-SDLRenderer::~SDLRenderer() {
-    SDL_DestroyWindow(_window);
-}
+SDLRenderer::~SDLRenderer() { SDL_DestroyWindow(_window); }
 
 void SDLRenderer::clear() {
     SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
@@ -40,12 +33,11 @@ void SDLRenderer::render_leds() {
     rect.w = width / NUM_LEDS;
     rect.h = width / NUM_LEDS;
     for (uint16_t i = 0; i < NUM_LEDS; i++) {
-        if (_leds[i].r == 0 && _leds[i].g == 0 && _leds[i].b == 0)
-            continue;
+        if (_leds[i].r == 0 && _leds[i].g == 0 && _leds[i].b == 0) continue;
 
         rect.x = 25 + rect.w * i;
-        SDL_SetRenderDrawColor(_renderer, _leds[i].r, _leds[i].g, _leds[i].b, 150);
+        SDL_SetRenderDrawColor(_renderer, _leds[i].r, _leds[i].g, _leds[i].b,
+                               150);
         SDL_RenderFillRect(_renderer, &rect);
     }
 }
-

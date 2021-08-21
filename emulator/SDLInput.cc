@@ -3,8 +3,7 @@
 void SDLInput::handle_input(Player *player) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        switch (event.type)
-        {
+        switch (event.type) {
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_w:
