@@ -11,11 +11,16 @@
 class Entity {
 private:
     uint16_t _position = 0;
+    bool _spawned = false;
 
 public:
+    void spawn(uint16_t pos) {
+        set_position(pos);
+        _spawned = true;
+    };
+    bool is_spawned() { return _spawned; };
     void set_position(uint16_t pos) {
         _position = clamp(pos, WORLD_MIN, WORLD_MAX);
-        std::cout << "orig: " << pos << "clamped " << _position << "\n";
     };
     uint16_t get_position() { return _position; };
 

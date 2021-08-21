@@ -10,6 +10,7 @@ add_library(common
     ../common/Renderer.h
     ../common/Entity.h
     ../common/Player.h
+    ../common/Enemy.h
     ../common/Input.h
     ../common/utils.h
 )
@@ -22,6 +23,7 @@ add_executable(emulator
     SDLInput.cc
     ../common/Game.cc
     ../common/Player.cc
+    ../common/Enemy.cc
 )
 
 target_link_libraries(emulator common ${SDL2_LIBRARIES})
