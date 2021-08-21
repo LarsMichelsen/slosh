@@ -8,6 +8,10 @@ include_directories(emulator ${SDL2_INCLUDE_DIRS})
 add_library(common
     ../common/Game.h
     ../common/Renderer.h
+    ../common/Entity.h
+    ../common/Player.h
+    ../common/Input.h
+    ../common/utils.h
 )
 set_target_properties(common PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(common PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
@@ -15,7 +19,9 @@ target_include_directories(common PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURC
 add_executable(emulator
     main.cc
     SDLRenderer.cc
+    SDLInput.cc
     ../common/Game.cc
+    ../common/Player.cc
 )
 
 target_link_libraries(emulator common ${SDL2_LIBRARIES})

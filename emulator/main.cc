@@ -2,6 +2,7 @@
 
 #include "../common/Game.h"
 #include "SDLRenderer.h"
+#include "SDLInput.h"
 
 #include <csignal>
 #include <chrono>
@@ -17,7 +18,8 @@ int main(int argc, char *argv[])
     signal(SIGINT, sigHandler);
 
     SDLRenderer renderer(3500, 60);
-    Game game(&renderer);
+    SDLInput input;
+    Game game(&renderer, &input);
 
     while (true) {
         auto start = std::chrono::system_clock::now();

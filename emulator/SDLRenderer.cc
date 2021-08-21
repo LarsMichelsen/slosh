@@ -21,42 +21,14 @@ SDLRenderer::~SDLRenderer() {
 }
 
 void SDLRenderer::clear() {
-    SDL_SetRenderDrawColor(_renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
     SDL_RenderClear(_renderer);
 }
 
 void SDLRenderer::show() {
-
-    this->handle_events();
-    this->render_leds();
+    clear();
+    render_leds();
     SDL_RenderPresent(_renderer);
-}
-
-void SDLRenderer::handle_events() {
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        switch (event.type)
-        {
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) {
-                    case SDLK_ESCAPE:
-                        exit(0);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case SDL_WINDOWEVENT:
-                switch (event.window.event) {
-                    case SDL_WINDOWEVENT_CLOSE:
-                        exit(0);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-        }
-    }
 }
 
 void SDLRenderer::render_leds() {

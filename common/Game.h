@@ -1,12 +1,17 @@
 #pragma once
 
 #include "Renderer.h"
+#include "Input.h"
+#include "Player.h"
 
 // Central entry point for the game
 class Game {
     private:
         Renderer *_renderer;
+        Input *_input;
+        Player *_player;
     public:
-        Game(Renderer *renderer);
+        Game(Renderer *renderer, Input *input);
+        ~Game();
         void tick();
 };

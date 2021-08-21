@@ -5,7 +5,6 @@ class SDLRenderer final : public Renderer {
 private:
     SDL_Window *_window;
     SDL_Renderer *_renderer;
-    void handle_events();
     void render_leds();
 public:
     SDLRenderer(uint16_t width, uint16_t height);
