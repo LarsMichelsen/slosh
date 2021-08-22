@@ -7,9 +7,10 @@ Game::Game(Renderer *renderer, Input *input)
     : _input(input),
       _renderer(renderer),
       _player(new Player(this)),
-      _enemies{Enemy(), Enemy(), Enemy(), Enemy(), Enemy()} {
+      _enemies{Enemy(this), Enemy(this), Enemy(this), Enemy(this),
+               Enemy(this)} {
     _player->spawn(0);
-    _enemies[0].spawn(500);
+    _enemies[0].spawn(10);
 }
 
 void Game::tick() {

@@ -12,7 +12,6 @@ class Game {
 private:
     Renderer *_renderer;
     Input *_input;
-    Player *_player;
     // Preinitialized objects - Not all are relevant during each level. It
     // depends on the logic of the level to make use of the objects.
     Enemy _enemies[5];
@@ -20,6 +19,8 @@ private:
     ms _start_time = get_ms();
 
 public:
+    Player *_player;
+
     Game(Renderer *renderer, Input *input);
     void tick();
     ms time();

@@ -15,6 +15,7 @@ public:
         set_position(pos);
         _spawned = true;
     };
+    void despawn() { _spawned = false; }
     bool is_spawned() { return _spawned; };
     void set_position(uint16_t pos) {
         if (pos > WORLD_MAX)
@@ -26,4 +27,5 @@ public:
 
     virtual void tick() = 0;
     virtual void show(Renderer *renderer) = 0;
+    virtual void die() = 0;
 };

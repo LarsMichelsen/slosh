@@ -59,3 +59,11 @@ void Player::attack(bool wants_to_attack) {
     _attacking = {true, _game->time()};
     _wants_to_attack = wants_to_attack;
 }
+
+// Whether or not the player is hitting the given entity with the attack
+bool Player::is_attacking(Entity *entity) {
+    return _attacking.attacking &&
+           abs(get_position() - entity->get_position()) <= _attack_range;
+}
+
+void Player::die() { despawn(); }

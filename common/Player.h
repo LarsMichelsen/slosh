@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdlib.h>
+
 #include "Entity.h"
 #include "Renderer.h"
 #include "stdint.h"
@@ -33,4 +35,6 @@ public:
 
     void move(int8_t direction);
     void attack(bool wants_to_attack);
+    bool is_attacking(Entity *entity);
+    virtual void die() override;
 };
