@@ -2,6 +2,7 @@
 
 #include <math.h>
 
+// For get_ms()
 #ifdef ARDUINO
 #include <Arduino.h>
 #else
@@ -24,3 +25,18 @@ uint16_t pos_to_led(uint16_t pos);
 typedef uint32_t ms;
 
 ms get_ms();
+
+// Allow platform independent debug logging. It uses serial output of the
+// board and stdout of the emulator.
+// Use it like this: `debug << "bla" << 1 << "\n";`
+#ifdef ARDUINO
+#define debug Serial
+template <class T>
+inline Print &operator<<(Print &obj, T arg) {
+    obj.print(arg);
+    return obj;
+}
+#else
+#include <iostream>
+#define debug std::cout
+#endif
