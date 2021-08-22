@@ -10,7 +10,9 @@ Game::Game(Renderer *renderer, Input *input)
       _enemies{Enemy(this), Enemy(this), Enemy(this), Enemy(this),
                Enemy(this)} {
     _player->spawn(0);
-    _enemies[0].spawn(24);
+    _enemies[0].spawn(100);
+    _enemies[1].spawn(500);
+    _enemies[2].spawn(800);
 }
 
 void Game::tick() {
