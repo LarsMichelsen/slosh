@@ -38,13 +38,44 @@ void Player::show_attack(Renderer *renderer) {
 }
 
 void Player::move(int8_t direction) {
+    if (!is_spawned()) return;
+
     if ((int)get_position() + (int)(direction * _speed) < 0)
-        set_position(0);
+        move_to(0);
     else
-        set_position(get_position() + (direction * _speed));
+        move_to(get_position() + (direction * _speed));
+}
+
+// Move the player to a new position while checking the collision with
+// a hostile entity
+void Player::move_to(uint16_t pos) {
+    uint16_t low, high;
+    if (get_position() > pos) {
+        low = pos;
+        high = get_position();
+    } else {
+        low = get_position();
+        high = pos;
+    }
+
+    // Is there an enemy between the origin and the destination
+    int num_enemies = sizeof(_game->_enemies) / sizeof(Enemy);
+    for (uint8_t i = 0; i < num_enemies; i++) {
+        Enemy *e = &_game->_enemies[i];
+        if (!e->is_spawned()) continue;
+
+        if (e->get_position() - high <= high - low) {
+            die();
+            return;
+        }
+    }
+
+    set_position(pos);
 }
 
 void Player::attack(bool wants_to_attack) {
+    if (!is_spawned()) return;
+
     if (_attacking.attacking) return;  // Already attacking. Let it finish.
 
     if (_wants_to_attack) {

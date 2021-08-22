@@ -12,14 +12,14 @@ class Game {
 private:
     Renderer *_renderer;
     Input *_input;
-    // Preinitialized objects - Not all are relevant during each level. It
-    // depends on the logic of the level to make use of the objects.
-    Enemy _enemies[5];
 
     ms _start_time = get_ms();
 
 public:
     Player *_player;
+    // Preinitialized objects - Not all are relevant during each level. It
+    // depends on the logic of the level to make use of the objects.
+    Enemy _enemies[5];
 
     Game(Renderer *renderer, Input *input);
     void tick();

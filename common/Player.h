@@ -34,6 +34,7 @@ public:
     virtual void show(Renderer *renderer) override;
 
     void move(int8_t direction);
+    void move_to(uint16_t direction);
     void attack(bool wants_to_attack);
     bool is_attacking(Entity *entity);
     virtual void die() override;

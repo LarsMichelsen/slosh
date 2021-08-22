@@ -7,9 +7,7 @@ Enemy::Enemy(Game *game) : _game(game) {}
 
 void Enemy::tick() {
     if (!is_spawned()) return;
-    if (_game->_player->is_attacking(this)) {
-        die();
-    }
+    if (_game->_player->is_attacking(this)) die();
 }
 
 void Enemy::show(Renderer *renderer) {
