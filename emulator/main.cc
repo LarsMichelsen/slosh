@@ -13,7 +13,7 @@ void sigHandler(int signum) { exit(0); }
 int main(int argc, char *argv[]) {
     signal(SIGINT, sigHandler);
 
-    SDLRenderer renderer(3500, 60);
+    SDLRenderer renderer(3840, 90);
     SDLInput input;
     Game game(&renderer, &input);
 

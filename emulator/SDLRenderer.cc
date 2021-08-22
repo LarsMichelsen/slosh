@@ -15,7 +15,7 @@ SDLRenderer::~SDLRenderer() { SDL_DestroyWindow(_window); }
 
 void SDLRenderer::clear() {
     // Clear the drawing area
-    SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(_renderer, 40, 40, 40, 255);
     SDL_RenderClear(_renderer);
 }
 
@@ -28,15 +28,31 @@ void SDLRenderer::show() {
 void SDLRenderer::render_leds() {
     int width, height;
     SDL_GetWindowSize(_window, &width, &height);
+    int margin = 25, border = 1, spacing = 1;
+    int row = 0, num_per_row = NUM_LEDS / 3;
+    int side_width =
+        ((width - (margin * 2) - (spacing * num_per_row)) / num_per_row);
 
-    SDL_Rect rect;
-    rect.y = 25;
-    rect.w = width / NUM_LEDS;
-    rect.h = width / NUM_LEDS;
-    for (uint16_t i = 0; i < NUM_LEDS; i++) {
-        if (_leds[i].r == 0 && _leds[i].g == 0 && _leds[i].b == 0) continue;
+    SDL_Rect rect{.y = margin,
+                  .w = side_width - (2 * border),
+                  .h = side_width - (2 * border)};
+    SDL_Rect border_rect{
+        .y = margin - border, .w = side_width, .h = side_width};
+    for (uint16_t i = 0, col = 0; i < NUM_LEDS; i++) {
+        row = i / num_per_row;
+        col = i % num_per_row;
 
-        rect.x = 25 + rect.w * i;
+        // go zig zag from one row to the next
+        if (row % 2 != 0) col = num_per_row - 1 - col;
+
+        rect.y = margin + (rect.h * row) + ((border + spacing + border) * row);
+        rect.x = margin + (rect.w * col) + ((border + spacing + border) * col);
+
+        border_rect.y = rect.y - border;
+        border_rect.x = rect.x - border;
+        SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 150);
+        SDL_RenderFillRect(_renderer, &border_rect);
+
         SDL_SetRenderDrawColor(_renderer, _leds[i].r, _leds[i].g, _leds[i].b,
                                150);
         SDL_RenderFillRect(_renderer, &rect);
