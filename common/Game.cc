@@ -1,18 +1,21 @@
 #include "Game.h"
 
+#include "Input.h"
+#include "Player.h"
+
 Game::Game(Renderer *renderer, Input *input)
     : _input(input),
       _renderer(renderer),
-      _player(Player()),
+      _player(new Player(this)),
       _enemies{Enemy(), Enemy(), Enemy(), Enemy(), Enemy()} {
-    _player.spawn(0);
+    _player->spawn(0);
     _enemies[0].spawn(500);
 }
 
 void Game::tick() {
     // Phase 1: Update the game logic.
-    _input->handle_input(&_player);
-    _player.tick();
+    _input->handle_input(_player);
+    _player->tick();
 
     int num_enemies = sizeof(_enemies) / sizeof(Enemy);
     for (uint8_t i = 0; i < num_enemies; i++) _enemies[i].tick();
@@ -21,6 +24,9 @@ void Game::tick() {
     // world representing `_renderer->_leds` data structure.
     _renderer->tick();
 
-    _player.show(_renderer);
+    _player->show(_renderer);
     for (uint8_t i = 0; i < num_enemies; i++) _enemies[i].show(_renderer);
 }
+
+// Returns the milliseconds since start of the game
+ms Game::time() { return get_ms() - _start_time; };
