@@ -1,7 +1,5 @@
 #pragma once
 
-#include <limits>
-
 #include "Entity.h"
 #include "Renderer.h"
 #include "stdint.h"

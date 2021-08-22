@@ -2,10 +2,7 @@
 
 #include <stdint.h>
 
-#include <algorithm>
-
 #include "Renderer.h"
-#include "iostream"
 #include "utils.h"
 
 class Entity {
@@ -20,7 +17,10 @@ public:
     };
     bool is_spawned() { return _spawned; };
     void set_position(uint16_t pos) {
-        _position = clamp(pos, WORLD_MIN, WORLD_MAX);
+        if (pos > WORLD_MAX)
+            _position = WORLD_MAX;
+        else
+            _position = pos;
     };
     uint16_t get_position() { return _position; };
 

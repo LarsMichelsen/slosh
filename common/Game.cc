@@ -20,7 +20,7 @@ void Game::tick() {
     // Phase 2: Render the objects for the user and write it to the
     // world representing `_renderer->_leds` data structure.
     _renderer->tick();
-    _player.show(_renderer);
 
+    _player.show(_renderer);
     for (uint8_t i = 0; i < num_enemies; i++) _enemies[i].show(_renderer);
 }

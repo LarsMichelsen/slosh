@@ -16,9 +16,10 @@ void Player::show(Renderer *renderer) {
 }
 
 void Player::move(int8_t direction) {
-    set_position(clamp(get_position() + direction,
-                       (int)std::numeric_limits<uint16_t>::lowest(),
-                       (int)std::numeric_limits<uint16_t>::max()));
+    if ((int)get_position() + (int)direction < 0)
+        set_position(0);
+    else
+        set_position(get_position() + direction);
 }
 
 void Player::attack() {}

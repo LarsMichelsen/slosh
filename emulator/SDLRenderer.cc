@@ -14,6 +14,7 @@ SDLRenderer::SDLRenderer(uint16_t width, uint16_t height) {
 SDLRenderer::~SDLRenderer() { SDL_DestroyWindow(_window); }
 
 void SDLRenderer::clear() {
+    // Clear the drawing area
     SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
     SDL_RenderClear(_renderer);
 }

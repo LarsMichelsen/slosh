@@ -1,11 +1,10 @@
-#define MS_PER_TICK 16  // ~ 63 fps
-
 #include <chrono>
 #include <csignal>
 #include <ctime>
 #include <thread>
 
 #include "../common/Game.h"
+#include "../common/utils.h"
 #include "SDLInput.h"
 #include "SDLRenderer.h"
 
