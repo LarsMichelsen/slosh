@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-const int NUM_LEDS = 576;
+#include "utils.h"
 
 struct LED {
     uint8_t r, g, b;

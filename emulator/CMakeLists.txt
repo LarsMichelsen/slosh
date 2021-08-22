@@ -24,6 +24,7 @@ add_executable(emulator
     ../common/Game.cc
     ../common/Player.cc
     ../common/Enemy.cc
+    ../common/utils.cc
 )
 
 target_link_libraries(emulator common ${SDL2_LIBRARIES})

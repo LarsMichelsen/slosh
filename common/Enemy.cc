@@ -9,7 +9,7 @@ void Enemy::tick() {
 void Enemy::show(Renderer *renderer) {
     if (!is_spawned()) return;
 
-    uint16_t pos = get_position();
+    uint16_t pos = pos_to_led(get_position());
     renderer->_leds[pos].r = 255;
     renderer->_leds[pos].g = 0;
     renderer->_leds[pos].b = 0;

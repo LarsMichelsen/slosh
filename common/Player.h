@@ -3,8 +3,12 @@
 #include "Entity.h"
 #include "Renderer.h"
 #include "stdint.h"
+#include "utils.h"
 
 class Player : public Entity {
+private:
+    uint8_t _speed = 4;
+
 public:
     Player();
     virtual void tick() override;
