@@ -7,8 +7,8 @@ Player::Player(Game *game) : _game(game) {}
 void Player::tick() {
     if (!is_spawned()) return;
 
-    if (_attacking.attacking &&
-        _game->time() - _attacking.time > _attack_duration)
+    if (_attacking.active &&
+        _game->time() - _attacking.since > _attack_duration)
         _attacking = {false, _game->time()};
 }
 
@@ -24,7 +24,7 @@ void Player::show_player(Renderer *renderer) {
 }
 
 void Player::show_attack(Renderer *renderer) {
-    if (!_attacking.attacking) return;
+    if (!_attacking.active) return;
 
     auto range = pos_to_led(_attack_range);
     auto pos = pos_to_led(get_position());
@@ -40,10 +40,21 @@ void Player::show_attack(Renderer *renderer) {
 void Player::move(int8_t direction) {
     if (!is_spawned()) return;
 
-    if ((int)get_position() + (int)(direction * _speed) < 0)
-        move_to(0);
-    else
-        move_to(get_position() + (direction * _speed));
+    bool wants_to_move = direction != 0;
+    if (_moving.active != wants_to_move)
+        _moving = {wants_to_move, _game->time()};
+
+    if (!_moving.active) return;
+
+    // Add some acceleration to allow a) exact control and b) fast movement
+    int move_duration = _game->time() - _moving.since;
+    int speed = _speed;
+    if (move_duration < 600) {
+        speed = _speed * (150 + move_duration) / 600;
+    }
+
+    int to = (int)get_position() + (int)(direction * speed);
+    move_to(to < 0 ? 0 : to);
 }
 
 // Move the player to a new position while checking the collision with
@@ -76,7 +87,7 @@ void Player::move_to(uint16_t pos) {
 void Player::attack(bool wants_to_attack) {
     if (!is_spawned()) return;
 
-    if (_attacking.attacking) return;  // Already attacking. Let it finish.
+    if (_attacking.active) return;  // Already attacking. Let it finish.
 
     if (_wants_to_attack) {
         // Prevent continous attacking. The user needs to release the attack
@@ -93,7 +104,7 @@ void Player::attack(bool wants_to_attack) {
 
 // Whether or not the player is hitting the given entity with the attack
 bool Player::is_attacking(Entity *entity) {
-    return _attacking.attacking &&
+    return _attacking.active &&
            abs(get_position() - entity->get_position()) <= _attack_range;
 }
 

@@ -9,9 +9,9 @@
 
 class Game;
 
-struct Attack {
-    bool attacking;
-    ms time;
+struct Task {
+    bool active;
+    ms since;
 };
 
 class Player : public Entity {
@@ -20,7 +20,8 @@ private:
 
     uint8_t _speed = 4;
     bool _wants_to_attack = false;
-    Attack _attacking{.attacking = false, .time = 0};
+    Task _attacking{.active = false, .since = 0};
+    Task _moving{.active = false, .since = 0};
 
     static constexpr ms _attack_duration{100};
     static const uint8_t _attack_range = 4;

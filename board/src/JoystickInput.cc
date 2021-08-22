@@ -24,6 +24,8 @@ void JoystickInput::handle_input(Player *player) {
         player->move(1);
     } else if (state_down == LOW) {
         player->move(-1);
+    } else {
+        player->move(0);
     }
 
     player->attack(state_attack_0 == LOW or state_attack_1 == LOW);

@@ -27,6 +27,10 @@ void SDLInput::handle_input(Player *player) {
                     case SDLK_SPACE:
                         player->attack(false);
                         break;
+                    case SDLK_w:
+                    case SDLK_s:
+                        player->move(0);
+                        break;
                     default:
                         break;
                 }
