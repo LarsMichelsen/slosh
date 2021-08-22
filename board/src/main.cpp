@@ -18,10 +18,7 @@ void setup() {
 
 void loop() {
     EVERY_N_MILLISECONDS(MS_PER_TICK) {
-        Serial.println("Tick");
         game.tick();
-        Serial.println("Render");
         renderer.show();
-        Serial.println("Post render");
     }
 }
