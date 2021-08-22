@@ -8,6 +8,7 @@
 class Player : public Entity {
 private:
     uint8_t _speed = 4;
+    bool _attacking = false;
 
 public:
     Player();
@@ -15,5 +16,5 @@ public:
     virtual void show(Renderer *renderer) override;
 
     void move(int8_t direction);
-    void attack();
+    void attack(bool attacking);
 };

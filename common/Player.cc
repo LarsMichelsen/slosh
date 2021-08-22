@@ -10,9 +10,14 @@ void Player::show(Renderer *renderer) {
     if (!is_spawned()) return;
 
     uint16_t pos = pos_to_led(get_position());
-    renderer->_leds[pos].r = 128;
-    renderer->_leds[pos].g = 128;
-    renderer->_leds[pos].b = 128;
+    renderer->set_led(pos, 100, 0, 100);
+
+    if (_attacking) {
+        renderer->set_led(pos - 2, 0, 0, 100);
+        renderer->set_led(pos - 1, 0, 0, 30);
+        renderer->set_led(pos + 1, 0, 0, 30);
+        renderer->set_led(pos + 2, 0, 0, 100);
+    }
 }
 
 void Player::move(int8_t direction) {
@@ -22,4 +27,4 @@ void Player::move(int8_t direction) {
         set_position(get_position() + (direction * _speed));
 }
 
-void Player::attack() {}
+void Player::attack(bool attacking) { _attacking = attacking; }

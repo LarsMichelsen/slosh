@@ -13,10 +13,19 @@ void SDLInput::handle_input(Player *player) {
                         player->move(-1);
                         break;
                     case SDLK_SPACE:
-                        player->attack();
+                        player->attack(true);
                         break;
                     case SDLK_ESCAPE:
                         exit(0);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case SDL_KEYUP:
+                switch (event.key.keysym.sym) {
+                    case SDLK_SPACE:
+                        player->attack(false);
                         break;
                     default:
                         break;
