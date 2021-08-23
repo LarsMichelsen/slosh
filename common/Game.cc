@@ -10,7 +10,7 @@ Game::Game(Renderer *renderer, Input *input)
       _exit(new Exit(this)),
       _enemies{Enemy(this), Enemy(this), Enemy(this), Enemy(this),
                Enemy(this)} {
-    _level = load_level(0);
+    _level = load_level(4);
 }
 
 void Game::tick() {
@@ -36,6 +36,7 @@ void Game::tick() {
 ms Game::time() { return get_ms() - _start_time; }
 
 uint8_t Game::load_level(uint8_t level) {
+    despawn_level();
     switch (level) {
         case 1:
             _player->spawn(0);
@@ -46,7 +47,21 @@ uint8_t Game::load_level(uint8_t level) {
         case 2:
             _player->spawn(0);
             _enemies[0].spawn(200, Movement::UpAndDown);
-            _enemies[2].spawn(800, Movement::Down);
+            _enemies[1].spawn(400, Movement::UpAndDown);
+            _enemies[2].spawn(700, Movement::UpAndDown);
+            return level;
+        case 3:
+            _player->spawn(0);
+            _enemies[0].spawn(200, Movement::UpAndDown);
+            _enemies[1].spawn(800, Movement::Down);
+            return level;
+        case 4:
+            _player->spawn(0);
+            _enemies[0].spawn(200, Movement::UpAndDown);
+            _enemies[1].spawn(400, Movement::UpAndDown);
+            _enemies[2].spawn(600, Movement::Down);
+            _enemies[3].spawn(800, Movement::Down);
+            _enemies[4].spawn(950, Movement::Down);
             return level;
         case 0:
         default:
@@ -63,7 +78,7 @@ bool Game::is_level_complete() {
     return true;
 }
 
-void Game::finish_level() {
+void Game::despawn_level() {
     // Despawn everything
     _player->despawn();
 
@@ -71,9 +86,10 @@ void Game::finish_level() {
     for (uint8_t i = 0; i < num_enemies; i++) _enemies[i].despawn();
 
     _exit->despawn();
+}
 
-    // Descend to next level
-    _level = load_level(_level + 1);
+void Game::finish_level() {
+    _level = load_level(_level + 1);  // Descend to next level
 }
 
 void Game::reload_level() { load_level(_level); }

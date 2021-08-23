@@ -29,6 +29,7 @@ public:
     ms time();
     uint8_t load_level(uint8_t level);
     bool is_level_complete();
+    void despawn_level();
     void finish_level();
     void reload_level();
 };
