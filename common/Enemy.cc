@@ -5,7 +5,7 @@
 
 Enemy::Enemy(Game *game) : Entity(game) { init_movement(Movement::None); }
 
-void Enemy::spawn(uint16_t pos, Movement movement) {
+void Enemy::spawn(pos_t pos, Movement movement) {
     Entity::spawn(pos);
     init_movement(movement);
 }
@@ -37,7 +37,7 @@ void Enemy::move() {
     _next_move = _game->time() + _move_delay;
 
     // Controls the movement pattern
-    uint16_t pos = get_position();
+    pos_t pos = get_position();
     switch (_movement) {
         case Movement::Down:
             move_to(pos - 1);

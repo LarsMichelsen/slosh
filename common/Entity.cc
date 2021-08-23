@@ -6,14 +6,14 @@
 
 Entity::Entity(Game *game) : _game(game) {}
 
-bool collides_during_move(uint16_t from, uint16_t to, uint16_t check) {
+bool collides_during_move(pos_t from, pos_t to, pos_t check) {
     return check >= from && check <= to;
 }
 
 // Move the entity to a new position while checking the collision with other
 // entities and give the object the option to trigger an action.
-void Entity::move_to(uint16_t pos) {
-    uint16_t low, high;
+void Entity::move_to(pos_t pos) {
+    pos_t low, high;
     if (get_position() > pos) {
         low = pos;
         high = get_position();

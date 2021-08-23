@@ -18,9 +18,11 @@
 
 const int NUM_LEDS = 576;
 
+typedef uint16_t pos_t;
+
 uint16_t map_to(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min,
                 uint16_t out_max);
-uint16_t pos_to_led(uint16_t pos);
+uint16_t pos_to_led(pos_t pos);
 
 typedef uint32_t ms;
 
