@@ -64,7 +64,7 @@ void Player::touches(Enemy *enemy) {
 }
 void Player::touches(Exit *exit) {
     debug << "Player::touches(Exit)\n";
-    _game->finish_level();
+    _game->mark_level_finished();
 }
 
 void Player::attack(bool wants_to_attack) {
@@ -95,7 +95,4 @@ bool Player::is_attacking(Entity *entity) {
     return _attacking.active && abs(dist) <= _attack_range;
 }
 
-void Player::die() {
-    despawn();
-    _game->reload_level();
-}
+void Player::die() { despawn(); }

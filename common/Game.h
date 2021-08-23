@@ -16,6 +16,10 @@ private:
 
     ms _start_time = get_ms();
     uint8_t _level;
+    bool _mark_level_finished;  // Flag for the next tick to change the level
+
+    void reload_level();
+    void finish_level();
 
 public:
     Player *_player;
@@ -29,7 +33,6 @@ public:
     ms time();
     uint8_t load_level(uint8_t level);
     bool is_level_complete();
+    void mark_level_finished() { _mark_level_finished = true; };
     void despawn_level();
-    void finish_level();
-    void reload_level();
 };

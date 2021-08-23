@@ -14,6 +14,10 @@ Game::Game(Renderer *renderer, Input *input)
 }
 
 void Game::tick() {
+    // Phase 0: Level switching
+    if (!_player->is_spawned()) reload_level();
+    if (_mark_level_finished) finish_level();
+
     // Phase 1: Update the game logic.
     _input->handle_input(_player);
     _player->tick();
@@ -34,6 +38,7 @@ ms Game::time() { return get_ms() - _start_time; }
 
 uint8_t Game::load_level(uint8_t level) {
     despawn_level();
+    _mark_level_finished = false;
     switch (level) {
         case 1:
             _player->spawn(0);
