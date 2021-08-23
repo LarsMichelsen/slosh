@@ -31,14 +31,12 @@ void Entity::move_to(pos_t pos) {
     }
 
     // Is there an enemy between the origin and the destination
-    int num_enemies = sizeof(_game->_enemies) / sizeof(Enemy);
-    for (uint8_t i = 0; i < num_enemies; i++) {
-        Enemy *e = &_game->_enemies[i];
-        if (this == e) continue;
-        if (!e->is_spawned()) continue;
+    for (auto enemy : _game->_enemies) {
+        if (this == &enemy) continue;
+        if (!enemy.is_spawned()) continue;
 
-        if (collides_during_move(low, high, e->get_position())) {
-            touches(e);
+        if (collides_during_move(low, high, enemy.get_position())) {
+            touches(&enemy);
             if (!is_spawned()) return;
         }
     }

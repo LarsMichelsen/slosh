@@ -17,10 +17,7 @@ void Game::tick() {
     // Phase 1: Update the game logic.
     _input->handle_input(_player);
     _player->tick();
-
-    int num_enemies = sizeof(_enemies) / sizeof(Enemy);
-    for (uint8_t i = 0; i < num_enemies; i++) _enemies[i].tick();
-
+    for (auto &enemy : _enemies) enemy.tick();
     _exit->tick();
 
     // Phase 2: Render the objects for the user and write it to the
@@ -28,7 +25,7 @@ void Game::tick() {
     _renderer->tick();
 
     _player->show(_renderer);
-    for (uint8_t i = 0; i < num_enemies; i++) _enemies[i].show(_renderer);
+    for (auto &enemy : _enemies) enemy.show(_renderer);
     _exit->show(_renderer);
 }
 
@@ -72,19 +69,15 @@ uint8_t Game::load_level(uint8_t level) {
 }
 
 bool Game::is_level_complete() {
-    int num_enemies = sizeof(_enemies) / sizeof(Enemy);
-    for (uint8_t i = 0; i < num_enemies; i++)
-        if (_enemies[i].is_spawned()) return false;
+    for (auto &enemy : _enemies)
+        if (enemy.is_spawned()) return false;
     return true;
 }
 
 void Game::despawn_level() {
     // Despawn everything
     _player->despawn();
-
-    int num_enemies = sizeof(_enemies) / sizeof(Enemy);
-    for (uint8_t i = 0; i < num_enemies; i++) _enemies[i].despawn();
-
+    for (auto &enemy : _enemies) enemy.despawn();
     _exit->despawn();
 }
 
