@@ -11,6 +11,7 @@ add_library(common
     ../common/Entity.h
     ../common/Player.h
     ../common/Enemy.h
+    ../common/Exit.h
     ../common/Input.h
     ../common/utils.h
 )
@@ -24,6 +25,7 @@ add_executable(emulator
     ../common/Game.cc
     ../common/Player.cc
     ../common/Enemy.cc
+    ../common/Exit.cc
     ../common/utils.cc
 )
 

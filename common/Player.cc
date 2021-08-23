@@ -58,7 +58,7 @@ void Player::move(int8_t direction) {
 }
 
 // Move the player to a new position while checking the collision with
-// a hostile entity
+// an entity
 void Player::move_to(uint16_t pos) {
     uint16_t low, high;
     if (get_position() > pos) {
@@ -79,6 +79,12 @@ void Player::move_to(uint16_t pos) {
             die();
             return;
         }
+    }
+
+    if (_game->_exit->is_spawned() &&
+        _game->_exit->get_position() - high < high - low) {
+        _game->finish_level();
+        return;
     }
 
     set_position(pos);
