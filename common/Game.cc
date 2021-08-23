@@ -70,3 +70,5 @@ void Game::finish_level() {
     // Descend to next level
     _level = load_level(_level + 1);
 }
+
+void Game::reload_level() { load_level(_level); }

@@ -118,4 +118,7 @@ bool Player::is_attacking(Entity *entity) {
     return _attacking.active && abs(dist) <= _attack_range;
 }
 
-void Player::die() { despawn(); }
+void Player::die() {
+    despawn();
+    _game->reload_level();
+}

@@ -30,4 +30,5 @@ public:
     uint8_t load_level(uint8_t level);
     bool is_level_complete();
     void finish_level();
+    void reload_level();
 };
