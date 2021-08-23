@@ -7,9 +7,6 @@
 class Game;
 
 class Exit : public Entity {
-private:
-    Game *_game;
-
 public:
     Exit(Game *game);
     virtual void tick() override;

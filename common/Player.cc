@@ -1,8 +1,9 @@
 #include "Player.h"
 
+#include "Enemy.h"
 #include "Game.h"
 
-Player::Player(Game *game) : _game(game) {}
+Player::Player(Game *game) : Entity(game) {}
 
 void Player::tick() {
     if (!is_spawned()) return;
@@ -57,37 +58,13 @@ void Player::move(int8_t direction) {
     move_to(to < 0 ? 0 : to);
 }
 
-// Move the player to a new position while checking the collision with
-// an entity
-void Player::move_to(uint16_t pos) {
-    uint16_t low, high;
-    if (get_position() > pos) {
-        low = pos;
-        high = get_position();
-    } else {
-        low = get_position();
-        high = pos;
-    }
-
-    // Is there an enemy between the origin and the destination
-    int num_enemies = sizeof(_game->_enemies) / sizeof(Enemy);
-    for (uint8_t i = 0; i < num_enemies; i++) {
-        Enemy *e = &_game->_enemies[i];
-        if (!e->is_spawned()) continue;
-
-        if (e->get_position() - high <= high - low) {
-            die();
-            return;
-        }
-    }
-
-    if (_game->_exit->is_spawned() &&
-        _game->_exit->get_position() - high < high - low) {
-        _game->finish_level();
-        return;
-    }
-
-    set_position(pos);
+void Player::touches(Enemy *enemy) {
+    debug << "Player::touches(Enemy)\n";
+    die();
+}
+void Player::touches(Exit *exit) {
+    debug << "Player::touches(Exit)\n";
+    _game->finish_level();
 }
 
 void Player::attack(bool wants_to_attack) {

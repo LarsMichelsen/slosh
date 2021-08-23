@@ -39,14 +39,19 @@ uint8_t Game::load_level(uint8_t level) {
     switch (level) {
         case 1:
             _player->spawn(0);
-            _enemies[0].spawn(100);
-            _enemies[1].spawn(500);
-            _enemies[2].spawn(800);
+            _enemies[0].spawn(100, Movement::None);
+            _enemies[1].spawn(500, Movement::None);
+            _enemies[2].spawn(800, Movement::None);
+            return level;
+        case 2:
+            _player->spawn(0);
+            _enemies[0].spawn(200, Movement::UpAndDown);
+            _enemies[2].spawn(800, Movement::Down);
             return level;
         case 0:
         default:
             _player->spawn(0);
-            _enemies[0].spawn(200);
+            _enemies[2].spawn(300, Movement::None);
             return 0;
     }
 }

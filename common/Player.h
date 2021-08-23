@@ -3,11 +3,13 @@
 #include <stdlib.h>
 
 #include "Entity.h"
+#include "Exit.h"
 #include "Renderer.h"
 #include "stdint.h"
 #include "utils.h"
 
 class Game;
+class Enemy;
 
 struct Task {
     bool active;
@@ -16,8 +18,6 @@ struct Task {
 
 class Player : public Entity {
 private:
-    Game *_game;
-
     uint8_t _speed = 4;
     bool _wants_to_attack = false;
     Task _attacking{.active = false, .since = 0};
@@ -35,8 +35,10 @@ public:
     virtual void show(Renderer *renderer) override;
 
     void move(int8_t direction);
-    void move_to(uint16_t direction);
     void attack(bool wants_to_attack);
     bool is_attacking(Entity *entity);
     virtual void die() override;
+
+    void touches(Enemy *enemy) override;
+    void touches(Exit *exit) override;
 };

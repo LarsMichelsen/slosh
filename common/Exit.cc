@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "Player.h"
 
-Exit::Exit(Game *game) : _game(game) {}
+Exit::Exit(Game *game) : Entity(game) {}
 
 void Exit::tick() {
     if (_game->is_level_complete() && !is_spawned()) spawn(WORLD_MAX);

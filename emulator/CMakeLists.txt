@@ -23,6 +23,7 @@ add_executable(emulator
     SDLRenderer.cc
     SDLInput.cc
     ../common/Game.cc
+    ../common/Entity.cc
     ../common/Player.cc
     ../common/Enemy.cc
     ../common/Exit.cc
