@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Exit.h"
 #include "Renderer.h"
+#include "Sound.h"
 #include "utils.h"
 
 class Player;
@@ -22,13 +23,15 @@ private:
     void finish_level();
 
 public:
+    Sound *_sound;
+
     Player *_player;
     // Preinitialized objects - Not all are relevant during each level. It
     // depends on the logic of the level to make use of the objects.
     Enemy _enemies[5];
     Exit *_exit;
 
-    Game(Renderer *renderer, Input *input);
+    Game(Renderer *renderer, Input *input, Sound *sound);
     void tick();
     ms time();
     uint8_t load_level(uint8_t level);

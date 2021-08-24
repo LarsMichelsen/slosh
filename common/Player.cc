@@ -11,6 +11,9 @@ void Player::tick() {
     if (_attacking.active &&
         _game->time() - _attacking.since > _attack_duration)
         _attacking = {false, _game->time()};
+    if (_attacking.active)
+        _game->_sound->play_attack(_attack_duration,
+                                   _game->time() - _attacking.since);
 }
 
 void Player::show(Renderer *renderer) {
@@ -27,14 +30,22 @@ void Player::show_player(Renderer *renderer) {
 void Player::show_attack(Renderer *renderer) {
     if (!_attacking.active) return;
 
+    // Make it flicker synchronized with the sound
+    uint8_t note_len = 100 / 5;
+    uint8_t r = 0, g = 0, b = 255;
+    if ((_game->time() - _attacking.since) / note_len % 2 == 0) {
+        g = 255;
+        b = 0;
+    }
+
     auto range = pos_to_led(_attack_range);
     auto pos = pos_to_led(get_position());
     for (auto i = pos - range; i < pos; i++) {
-        renderer->set_led(i, 0, 0, 100);
+        renderer->set_led(i, r, g, b);
     }
 
     for (auto i = pos + 1; i < pos + range + 1; i++) {
-        renderer->set_led(i, 0, 0, 100);
+        renderer->set_led(i, r, g, b);
     }
 }
 

@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     SDLRenderer renderer(3840, 90);
     SDLSound sound;
     SDLInput input;
-    Game game(&renderer, &input);
+    Game game(&renderer, &input, &sound);
 
     while (true) {
         auto start = std::chrono::system_clock::now();

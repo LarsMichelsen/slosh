@@ -13,3 +13,14 @@ void Sound::play_test() {
         sleep_for(noteDuration * 4 / 3);
     }
 }
+
+void Sound::play_attack(ms duration, ms passed) {
+    // Synchronized with the flicker animation
+    uint8_t note_len = duration / 5;
+    uint16_t melody[] = {587, 494, 587, 494, 587};
+    uint8_t index = passed > 0 ? passed / note_len : 0;
+    debug << passed << " " << note_len << " " << melody[index] << "\n";
+    play_note(melody[index], note_len * 4 / 3);
+}
+
+void Sound::play_enemy_died() { play_note(1046, 40); }

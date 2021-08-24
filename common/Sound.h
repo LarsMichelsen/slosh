@@ -9,4 +9,6 @@ protected:
 
 public:
     void play_test();
+    void play_attack(ms duration, ms passed);
+    void play_enemy_died();
 };

@@ -3,9 +3,10 @@
 #include "Input.h"
 #include "Player.h"
 
-Game::Game(Renderer *renderer, Input *input)
+Game::Game(Renderer *renderer, Input *input, Sound *sound)
     : _input(input),
       _renderer(renderer),
+      _sound(sound),
       _player(new Player(this)),
       _exit(new Exit(this)),
       _enemies{Enemy(this), Enemy(this), Enemy(this), Enemy(this),
@@ -68,6 +69,7 @@ uint8_t Game::load_level(uint8_t level) {
         case 0:
         default:
             _player->spawn(0);
+            _enemies[0].spawn(2, Movement::None);
             _enemies[2].spawn(300, Movement::None);
             return 0;
     }

@@ -25,7 +25,10 @@ void Enemy::init_movement(Movement movement) {
 
 void Enemy::tick() {
     if (!is_spawned()) return;
-    if (_game->_player->is_attacking(this)) die();
+    if (_game->_player->is_attacking(this)) {
+        die();
+        _game->_sound->play_enemy_died();
+    }
     move();
 }
 

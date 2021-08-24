@@ -10,7 +10,7 @@
 BoardRenderer renderer(128);
 BoardSound sound;
 JoystickInput input(2, 3, 4, 5);
-Game game(&renderer, &input);
+Game game(&renderer, &input, &sound);
 
 void setup() {
     delay(1000);
