@@ -8,6 +8,7 @@ include_directories(emulator ${SDL2_INCLUDE_DIRS})
 add_library(common
     ../common/Game.h
     ../common/Renderer.h
+    ../common/Sound.h
     ../common/Entity.h
     ../common/Player.h
     ../common/Enemy.h
@@ -21,8 +22,10 @@ target_include_directories(common PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURC
 add_executable(emulator
     main.cc
     SDLRenderer.cc
+    SDLSound.cc
     SDLInput.cc
     ../common/Game.cc
+    ../common/Sound.cc
     ../common/Entity.cc
     ../common/Player.cc
     ../common/Enemy.cc

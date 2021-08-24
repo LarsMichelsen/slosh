@@ -27,6 +27,7 @@ uint16_t pos_to_led(pos_t pos);
 typedef uint32_t ms;
 
 ms get_ms();
+void sleep_for(ms ms);
 
 // Allow platform independent debug logging. It uses serial output of the
 // board and stdout of the emulator.

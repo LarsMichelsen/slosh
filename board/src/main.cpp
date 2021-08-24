@@ -2,11 +2,13 @@
 #include <FastLED.h>
 
 #include "BoardRenderer.h"
+#include "BoardSound.h"
 #include "Game.h"
 #include "JoystickInput.h"
 #include "utils.h"
 
 BoardRenderer renderer(128);
+BoardSound sound;
 JoystickInput input(2, 3, 4, 5);
 Game game(&renderer, &input);
 

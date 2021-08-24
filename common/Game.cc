@@ -10,7 +10,7 @@ Game::Game(Renderer *renderer, Input *input)
       _exit(new Exit(this)),
       _enemies{Enemy(this), Enemy(this), Enemy(this), Enemy(this),
                Enemy(this)} {
-    _level = load_level(4);
+    _level = load_level(0);
 }
 
 void Game::tick() {

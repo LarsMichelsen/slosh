@@ -8,11 +8,13 @@ This project uses the same basic concepts:
 * Minimalistic world: 1 RGB LED strip is the whole playground
 * One joystick to control the player
 
-However, I used a little different components than the other projects
+However, I use a little different components than the other projects I have
+seen so far:
 
 * Arduino Mega
 * 4 concatenated 144 per meter WS2128B strips
 * 1 arcade joystick to control the player
+* 1 speaker from broken headphones
 
 ## Software
 
@@ -29,8 +31,8 @@ applications.
 The development environment was so far (but should not be limited to that):
 
 * Ubuntu 20.04
-* Clang 10
-* PlatformIO 5.1.1
+* Clang 10, cmake for the emulator
+* PlatformIO 5.1.1 for the board
 
 ### Build the emulator
 
@@ -59,6 +61,11 @@ When using the emulator, you use the keyboard for controls:
 | W      | Move up |
 | S      | Move down |
 | SPACE  | Attack |
+
+### Board controls
+
+You use the vertical axis for moving up and down the LED strip and the
+horizontal axis for triggering the attack.
 
 ### Build the board firmware
 

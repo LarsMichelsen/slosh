@@ -7,6 +7,7 @@
 #include "../common/utils.h"
 #include "SDLInput.h"
 #include "SDLRenderer.h"
+#include "SDLSound.h"
 
 void sigHandler(int signum) { exit(0); }
 
@@ -14,6 +15,7 @@ int main(int argc, char *argv[]) {
     signal(SIGINT, sigHandler);
 
     SDLRenderer renderer(3840, 90);
+    SDLSound sound;
     SDLInput input;
     Game game(&renderer, &input);
 

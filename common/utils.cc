@@ -21,3 +21,14 @@ ms get_ms() {
     return _t.tv_sec * 1000 + lround(_t.tv_nsec / 1.0e6);
 #endif
 }
+
+#ifndef ARDUINO
+#include <unistd.h>
+#endif
+void sleep_for(ms ms) {
+#ifdef ARDUINO
+    delay(ms);
+#else
+    usleep(ms * 1000);
+#endif
+}
