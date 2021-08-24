@@ -76,3 +76,8 @@ Future ideas
 ------------
 
 * Add multiplayer capabilities with 2nd joystick and other game mode
+
+License
+-------
+
+It's the GPLv3. See [LICENSE](LICENSE) file.
