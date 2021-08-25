@@ -12,11 +12,12 @@ class Input;
 class GameStateLevel final : public GameState {
 private:
     uint8_t _level;
-    bool _mark_level_finished;  // Flag for the next tick to change the level
+    bool _mark_finished;  // Flag for the next tick to change the level
     ms _start_time = get_ms();
 
     void reload_level();
     void finish_level();
+    uint8_t load_level(uint8_t level);
 
 public:
     Player *_player;
@@ -32,8 +33,7 @@ public:
     ~GameStateLevel();
 
     ms time();
-    uint8_t load_level(uint8_t level);
-    bool is_level_complete();
-    void mark_level_finished() { _mark_level_finished = true; };
-    void despawn_level();
+    bool is_complete();
+    void mark_finished() { _mark_finished = true; };
+    void despawn();
 };

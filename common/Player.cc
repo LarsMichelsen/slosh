@@ -75,7 +75,7 @@ void Player::touches(Enemy *enemy) {
 }
 void Player::touches(Exit *exit) {
     debug << "Player::touches(Exit)\n";
-    _level->mark_level_finished();
+    _level->mark_finished();
 }
 
 void Player::attack(bool wants_to_attack) {

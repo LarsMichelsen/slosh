@@ -6,7 +6,7 @@
 Exit::Exit(GameStateLevel *level) : Entity(level) {}
 
 void Exit::tick() {
-    if (_level->is_level_complete() && !is_spawned()) spawn(WORLD_MAX);
+    if (_level->is_complete() && !is_spawned()) spawn(WORLD_MAX);
 }
 
 void Exit::show(Renderer *renderer) {

@@ -19,12 +19,12 @@ GameStateLevel::~GameStateLevel() {
 }
 
 void GameStateLevel::enter() { reload_level(); }
-void GameStateLevel::exit() { despawn_level(); }
+void GameStateLevel::exit() { despawn(); }
 
 void GameStateLevel::tick() {
     // Phase 0: Level switching
     if (!_player->is_spawned()) reload_level();
-    if (_mark_level_finished) finish_level();
+    if (_mark_finished) finish_level();
 
     // Phase 1: Update the game logic.
     _input->handle_input(_player);
@@ -41,8 +41,8 @@ void GameStateLevel::tick() {
     _exit->show(_renderer);
 }
 uint8_t GameStateLevel::load_level(uint8_t level) {
-    despawn_level();
-    _mark_level_finished = false;
+    despawn();
+    _mark_finished = false;
     switch (level) {
         case 1:
             _player->spawn(0);
@@ -72,19 +72,21 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
         case 0:
         default:
             _player->spawn(0);
-            _enemies[0].spawn(2, Movement::None);
+            _enemies[0].spawn(30, Movement::None);
+            _enemies[1].spawn(50, Movement::UpAndDown);
             _enemies[2].spawn(300, Movement::None);
             return 0;
     }
 }
 
-bool GameStateLevel::is_level_complete() {
+// Whether or not all problems have been solved
+bool GameStateLevel::is_complete() {
     for (auto &enemy : _enemies)
         if (enemy.is_spawned()) return false;
     return true;
 }
 
-void GameStateLevel::despawn_level() {
+void GameStateLevel::despawn() {
     // Despawn everything
     _player->despawn();
     for (auto &enemy : _enemies) enemy.despawn();
