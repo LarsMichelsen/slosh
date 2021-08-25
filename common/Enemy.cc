@@ -1,9 +1,11 @@
 #include "Enemy.h"
 
-#include "Game.h"
+#include "GameStateLevel.h"
 #include "Player.h"
 
-Enemy::Enemy(Game *game) : Entity(game) { init_movement(Movement::None); }
+Enemy::Enemy(GameStateLevel *level) : Entity(level) {
+    init_movement(Movement::None);
+}
 
 void Enemy::spawn(pos_t pos, Movement movement) {
     Entity::spawn(pos);
@@ -25,9 +27,9 @@ void Enemy::init_movement(Movement movement) {
 
 void Enemy::tick() {
     if (!is_spawned()) return;
-    if (_game->_player->is_attacking(this)) {
+    if (_level->_player->is_attacking(this)) {
         die();
-        _game->_sound->play_enemy_died();
+        _level->_sound->play_enemy_died();
     }
     move();
 }
@@ -36,8 +38,8 @@ void Enemy::move() {
     if (_movement == Movement::None) return;
 
     // Controls the movement speed
-    if (_next_move > _game->time()) return;
-    _next_move = _game->time() + _move_delay;
+    if (_next_move > _level->time()) return;
+    _next_move = _level->time() + _move_delay;
 
     // Controls the movement pattern
     pos_t pos = get_position();

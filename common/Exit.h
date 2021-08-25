@@ -4,11 +4,11 @@
 #include "Renderer.h"
 #include "stdint.h"
 
-class Game;
+class GameStateLevel;
 
 class Exit : public Entity {
 public:
-    Exit(Game *game);
+    Exit(GameStateLevel *level);
     virtual void tick() override;
     virtual void show(Renderer *renderer) override;
     virtual void die() override;

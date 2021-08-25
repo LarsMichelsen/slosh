@@ -1,19 +1,19 @@
 #include "Player.h"
 
 #include "Enemy.h"
-#include "Game.h"
+#include "GameStateLevel.h"
 
-Player::Player(Game *game) : Entity(game) {}
+Player::Player(GameStateLevel *level) : Entity(level) {}
 
 void Player::tick() {
     if (!is_spawned()) return;
 
     if (_attacking.active &&
-        _game->time() - _attacking.since > _attack_duration)
-        _attacking = {false, _game->time()};
+        _level->time() - _attacking.since > _attack_duration)
+        _attacking = {false, _level->time()};
     if (_attacking.active)
-        _game->_sound->play_attack(_attack_duration,
-                                   _game->time() - _attacking.since);
+        _level->_sound->play_attack(_attack_duration,
+                                    _level->time() - _attacking.since);
 }
 
 void Player::show(Renderer *renderer) {
@@ -33,7 +33,7 @@ void Player::show_attack(Renderer *renderer) {
     // Make it flicker synchronized with the sound
     uint8_t note_len = 100 / 5;
     uint8_t r = 0, g = 0, b = 255;
-    if ((_game->time() - _attacking.since) / note_len % 2 == 0) {
+    if ((_level->time() - _attacking.since) / note_len % 2 == 0) {
         g = 255;
         b = 0;
     }
@@ -54,12 +54,12 @@ void Player::move(int8_t direction) {
 
     bool wants_to_move = direction != 0;
     if (_moving.active != wants_to_move)
-        _moving = {wants_to_move, _game->time()};
+        _moving = {wants_to_move, _level->time()};
 
     if (!_moving.active) return;
 
     // Add some acceleration to allow a) exact control and b) fast movement
-    int move_duration = _game->time() - _moving.since;
+    int move_duration = _level->time() - _moving.since;
     int speed = _speed;
     if (move_duration < 600) {
         speed = _speed * (150 + move_duration) / 600;
@@ -75,7 +75,7 @@ void Player::touches(Enemy *enemy) {
 }
 void Player::touches(Exit *exit) {
     debug << "Player::touches(Exit)\n";
-    _game->mark_level_finished();
+    _level->mark_level_finished();
 }
 
 void Player::attack(bool wants_to_attack) {
@@ -92,7 +92,7 @@ void Player::attack(bool wants_to_attack) {
     if (!wants_to_attack) return;  // Does not want to attack. Done.
 
     // New attack started
-    _attacking = {true, _game->time()};
+    _attacking = {true, _level->time()};
     _wants_to_attack = wants_to_attack;
 }
 

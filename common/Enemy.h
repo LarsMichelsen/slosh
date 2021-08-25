@@ -4,7 +4,7 @@
 #include "Renderer.h"
 #include "stdint.h"
 
-class Game;
+class GameStateLevel;
 class Player;
 
 enum Movement {
@@ -28,7 +28,7 @@ private:
     void init_movement(Movement movement);
 
 public:
-    Enemy(Game *game);
+    Enemy(GameStateLevel *level);
     virtual void tick() override;
     virtual void show(Renderer *renderer) override;
     virtual void die() override;

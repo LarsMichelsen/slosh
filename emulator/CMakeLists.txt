@@ -7,6 +7,7 @@ include_directories(emulator ${SDL2_INCLUDE_DIRS})
 # Directly include the common components into this cmake application
 add_library(common
     ../common/Game.h
+    ../common/GameState.h
     ../common/Renderer.h
     ../common/Sound.h
     ../common/Entity.h
@@ -25,6 +26,7 @@ add_executable(emulator
     SDLSound.cc
     SDLInput.cc
     ../common/Game.cc
+    ../common/GameStateLevel.cc
     ../common/Sound.cc
     ../common/Entity.cc
     ../common/Player.cc

@@ -1,12 +1,12 @@
 #include "Exit.h"
 
-#include "Game.h"
+#include "GameStateLevel.h"
 #include "Player.h"
 
-Exit::Exit(Game *game) : Entity(game) {}
+Exit::Exit(GameStateLevel *level) : Entity(level) {}
 
 void Exit::tick() {
-    if (_game->is_level_complete() && !is_spawned()) spawn(WORLD_MAX);
+    if (_level->is_level_complete() && !is_spawned()) spawn(WORLD_MAX);
 }
 
 void Exit::show(Renderer *renderer) {

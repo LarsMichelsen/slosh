@@ -5,7 +5,7 @@
 #include "Renderer.h"
 #include "utils.h"
 
-class Game;
+class GameStateLevel;
 class Player;
 class Enemy;
 class Exit;
@@ -16,10 +16,10 @@ private:
     bool _spawned = false;
 
 protected:
-    Game *_game;
+    GameStateLevel *_level;
 
 public:
-    Entity(Game *game);
+    Entity(GameStateLevel *level);
     void spawn(pos_t pos) {
         set_position(pos);
         _spawned = true;

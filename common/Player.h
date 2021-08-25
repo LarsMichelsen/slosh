@@ -8,7 +8,7 @@
 #include "stdint.h"
 #include "utils.h"
 
-class Game;
+class GameStateLevel;
 class Enemy;
 
 struct Task {
@@ -30,7 +30,7 @@ private:
     void show_attack(Renderer *renderer);
 
 public:
-    Player(Game *_game);
+    Player(GameStateLevel *level);
     virtual void tick() override;
     virtual void show(Renderer *renderer) override;
 

@@ -1,0 +1,6 @@
+set -e
+while true; do
+    ./upload
+    ./serial
+    sleep 1
+done
