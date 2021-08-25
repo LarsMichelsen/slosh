@@ -27,6 +27,7 @@ add_executable(emulator
     SDLInput.cc
     ../common/Game.cc
     ../common/GameStateLevel.cc
+    ../common/GameStateDead.cc
     ../common/Sound.cc
     ../common/Entity.cc
     ../common/Player.cc

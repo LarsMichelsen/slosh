@@ -21,9 +21,12 @@ GameStateLevel::~GameStateLevel() {
 void GameStateLevel::enter() { reload_level(); }
 void GameStateLevel::exit() { despawn(); }
 
+void GameStateLevel::next_state() {
+    if (!_player->is_spawned()) _game->set_state(_game->_state_dead);
+}
+
 void GameStateLevel::tick() {
     // Phase 0: Level switching
-    if (!_player->is_spawned()) reload_level();
     if (_mark_finished) finish_level();
 
     // Phase 1: Update the game logic.

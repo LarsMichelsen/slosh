@@ -19,6 +19,7 @@ public:
     virtual void enter() = 0;
     virtual void tick() = 0;
     virtual void exit() = 0;
+    virtual void next_state() = 0;
     GameState(Renderer* renderer, Input* input, Sound* sound, Game* game)
         : _renderer(renderer), _input(input), _sound(sound), _game(game){};
     ~GameState(){};

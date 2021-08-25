@@ -5,6 +5,7 @@
 #include "Renderer.h"
 #include "Sound.h"
 #include "stdint.h"
+#include "utils.h"
 
 class Player;
 class Input;
@@ -29,6 +30,7 @@ public:
     virtual void enter() override;
     virtual void tick() override;
     virtual void exit() override;
+    virtual void next_state() override;
     GameStateLevel(Renderer *renderer, Input *input, Sound *sound, Game *game);
     ~GameStateLevel();
 

@@ -27,6 +27,7 @@ void Entity::move_to(pos_t pos) {
         _level->_player->is_spawned() &&
         collides_during_move(low, high, _level->_player->get_position())) {
         touches(_level->_player);
+        set_position(_level->_player->get_position());
         if (!is_spawned()) return;
     }
 
@@ -37,6 +38,7 @@ void Entity::move_to(pos_t pos) {
 
         if (collides_during_move(low, high, enemy.get_position())) {
             touches(&enemy);
+            set_position(enemy.get_position());
             if (!is_spawned()) return;
         }
     }
@@ -44,6 +46,7 @@ void Entity::move_to(pos_t pos) {
     if (_level->_exit->is_spawned() &&
         collides_during_move(low, high, _level->_exit->get_position())) {
         touches(_level->_exit);
+        set_position(_level->_exit->get_position());
         if (!is_spawned()) return;
     }
 
