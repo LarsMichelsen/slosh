@@ -38,3 +38,5 @@ void Sound::play_player_died(ms duration, ms passed) {
     _player_died_last_index = index;
     play_note(melody[index], note_len);
 }
+
+void Sound::play_level_finished(ms duration, ms passed) {}

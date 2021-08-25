@@ -14,4 +14,5 @@ public:
     void play_attack(ms duration, ms passed);
     void play_enemy_died();
     void play_player_died(ms duration, ms passed);
+    void play_level_finished(ms duration, ms passed);
 };

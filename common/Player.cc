@@ -69,14 +69,8 @@ void Player::move(int8_t direction) {
     move_to(to < 0 ? 0 : to);
 }
 
-void Player::touches(Enemy *enemy) {
-    debug << "Player::touches(Enemy)\n";
-    die();
-}
-void Player::touches(Exit *exit) {
-    debug << "Player::touches(Exit)\n";
-    _level->mark_finished();
-}
+void Player::touches(Enemy *enemy) { die(); }
+void Player::touches(Exit *exit) { _level->mark_finished(); }
 
 void Player::attack(bool wants_to_attack) {
     if (!is_spawned()) return;

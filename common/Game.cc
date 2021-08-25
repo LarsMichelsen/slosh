@@ -6,7 +6,8 @@
 
 Game::Game(Renderer *renderer, Input *input, Sound *sound)
     : _state_level(new GameStateLevel(renderer, input, sound, this)),
-      _state_dead(new GameStateDead(renderer, input, sound, this)) {
+      _state_dead(new GameStateDead(renderer, input, sound, this)),
+      _state_finished(new GameStateFinished(renderer, input, sound, this)) {
     _current_state = _state_level;
 }
 

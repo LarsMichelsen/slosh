@@ -17,7 +17,6 @@ private:
     ms _start_time = get_ms();
 
     void reload_level();
-    void finish_level();
     uint8_t load_level(uint8_t level);
 
 public:
