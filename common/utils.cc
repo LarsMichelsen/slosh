@@ -12,13 +12,25 @@ uint16_t pos_to_led(pos_t pos) {
     return led;
 }
 
+uint32_t start_ms = 0;
+
+// Return miliseconds since board init and on emulator since the first call to
+// this function.
 ms get_ms() {
 #ifdef ARDUINO
     return millis();
 #else
     struct timespec _t;
-    clock_gettime(CLOCK_REALTIME, &_t);
-    return _t.tv_sec * 1000 + lround(_t.tv_nsec / 1.0e6);
+
+    if (start_ms == 0) {
+        struct timespec _start_time;
+        clock_gettime(CLOCK_MONOTONIC, &_start_time);
+        start_ms =
+            _start_time.tv_sec * 1000 + lround(_start_time.tv_nsec / 1.0e6);
+    }
+
+    clock_gettime(CLOCK_MONOTONIC, &_t);
+    return (_t.tv_sec * 1000 + lround(_t.tv_nsec / 1.0e6)) - start_ms;
 #endif
 }
 
