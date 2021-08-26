@@ -18,7 +18,6 @@ protected:
     uint8_t _play_melody_last_index = 255;
 
 public:
-    void play_test();
     void play_attack(ms passed);
     void play_enemy_died();
     void play_player_died(ms passed);
