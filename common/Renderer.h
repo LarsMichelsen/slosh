@@ -26,19 +26,19 @@ public:
         for (pos_t i = 0; i < NUM_LEDS; i++) _leds[i].set_rgb(0, 0, 0);
     };
     void set_led(pos_t pos, uint8_t r, uint8_t g, uint8_t b) {
-        if (pos < WORLD_MIN or pos > WORLD_MAX) return;
+        if (pos < 0 or pos > NUM_LEDS - 1) return;
         _leds[pos].set_rgb(r, g, b);
     };
 
     void fill_solid(pos_t pos, int num, const struct LED& color) {
         for (int i = 0; i < num; ++i) {
-            if (pos < WORLD_MIN or pos > WORLD_MAX) continue;
+            if (pos < 0 or pos > NUM_LEDS - 1) return;
             _leds[i] = color;
         }
     }
 
     void fade_to_black(pos_t pos, uint8_t value) {
-        if (pos < WORLD_MIN or pos > WORLD_MAX) return;
+        if (pos < 0 or pos > NUM_LEDS - 1) return;
         uint8_t r = _leds[pos].r, g = _leds[pos].g, b = _leds[pos].b;
 
         r = (r <= 10) ? 0 : (uint8_t)r - (r * value / 256);
