@@ -43,3 +43,12 @@ inline Print &operator<<(Print &obj, T arg) {
 #include <iostream>
 #define debug std::cout
 #endif
+
+#ifndef ARDUINO
+uint8_t random8();
+uint8_t random8(uint8_t lim);
+uint8_t random8(uint8_t min, uint8_t lim);
+uint16_t random16();
+uint16_t random16(uint16_t lim);
+uint16_t random16(uint16_t min, uint16_t lim);
+#endif

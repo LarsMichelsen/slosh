@@ -10,10 +10,8 @@ BoardRenderer::~BoardRenderer() {}
 void BoardRenderer::clear() { FastLED.clear(); }
 void BoardRenderer::show() {
     clear();
-    for (uint16_t i = 0; i < NUM_LEDS; i++) {
-        _board_leds[i].r = _leds[i].r;
-        _board_leds[i].g = _leds[i].g;
-        _board_leds[i].b = _leds[i].b;
-    }
+    for (uint16_t i = 0; i < NUM_LEDS; i++)
+        if (_leds[i].r != 0 || _leds[i].g != 0 || _leds[i].b != 0)
+            _board_leds[i].setRGB(_leds[i].r, _leds[i].g, _leds[i].b);
     FastLED.show();
 }
