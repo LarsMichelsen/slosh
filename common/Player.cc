@@ -12,8 +12,7 @@ void Player::tick() {
         _level->time() - _attacking.since > _attack_duration)
         _attacking = {false, _level->time()};
     if (_attacking.active)
-        _level->_sound->play_attack(_attack_duration,
-                                    _level->time() - _attacking.since);
+        _level->_sound->play_attack(_level->time() - _attacking.since);
 }
 
 void Player::show(Renderer *renderer) {
@@ -31,7 +30,7 @@ void Player::show_attack(Renderer *renderer) {
     if (!_attacking.active) return;
 
     // Make it flicker synchronized with the sound
-    uint8_t note_len = 100 / 5;
+    uint8_t note_len = 20;
     uint8_t r = 0, g = 0, b = 255;
     if ((_level->time() - _attacking.since) / note_len % 2 == 0) {
         g = 255;

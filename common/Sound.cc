@@ -14,29 +14,16 @@ void Sound::play_test() {
     }
 }
 
-void Sound::play_attack(ms duration, ms passed) {
-    // Synchronized with the flicker animation
-    uint8_t note_len = duration / 5;
-    uint16_t melody[] = {587, 494, 587, 494, 587};
-    uint8_t index = passed > 0 ? passed / note_len : 0;
-    // debug << passed << " " << note_len << " " << melody[index] << "\n";
-    play_note(melody[index], note_len * 4 / 3);
+void Sound::play_attack(ms passed) {
+    Note melody[] = {{587, 4}, {494, 4}, {587, 4}, {494, 4}, {587, 4}};
+    play_melody(melody, sizeof(melody) / sizeof(Note), 20, passed);
 }
 
 void Sound::play_enemy_died() { play_note(1046, 40); }
 
-void Sound::play_player_died(ms duration, ms passed) {
-    if (passed > duration) {
-        _player_died_last_index = 255;
-        return;
-    }
-
-    uint8_t note_len = duration / 5;
-    uint16_t melody[] = {174, 87, 0, 0, 0};
-    uint8_t index = passed > 0 ? passed / note_len : 0;
-    if (index == _player_died_last_index) return;
-    _player_died_last_index = index;
-    play_note(melody[index], note_len);
+void Sound::play_player_died(ms passed) {
+    Note melody[] = {{174, 4}, {87, 4}};
+    play_melody(melody, sizeof(melody) / sizeof(Note), 100, passed);
 }
 
 void Sound::play_level_finished(ms passed) {

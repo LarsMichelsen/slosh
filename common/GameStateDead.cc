@@ -21,7 +21,7 @@ void GameStateDead::next_state() {
 }
 
 void GameStateDead::tick() {
-    _sound->play_player_died(500, get_ms() - _start_time);
+    _sound->play_player_died(get_ms() - _start_time);
     _renderer->tick();
 
     ms duration = get_ms() - _start_time;
