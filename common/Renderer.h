@@ -5,7 +5,7 @@
 #include "utils.h"
 
 struct LED {
-    uint8_t r, g, b;
+    uint8_t r = 0, g = 0, b = 0;
 
     inline LED& set_rgb(uint8_t nr, uint8_t ng, uint8_t nb) {
         r = nr;
@@ -19,7 +19,7 @@ struct LED {
 // It's task is to display the state of the game.
 class Renderer {
 public:
-    LED _leds[NUM_LEDS] = {0, 0, 0};
+    LED _leds[NUM_LEDS];
 
     void tick() {
         // Clear the logical representation of the map
