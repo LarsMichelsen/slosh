@@ -23,11 +23,7 @@ public:
 
     void tick() {
         // Clear the logical representation of the map
-        for (pos_t i = 0; i < NUM_LEDS; i++) {
-            _leds[i].r = 0;
-            _leds[i].g = 0;
-            _leds[i].b = 0;
-        }
+        for (pos_t i = 0; i < NUM_LEDS; i++) _leds[i].set_rgb(0, 0, 0);
     };
     void set_led(pos_t pos, uint8_t r, uint8_t g, uint8_t b) {
         if (pos < WORLD_MIN or pos > WORLD_MAX) return;
