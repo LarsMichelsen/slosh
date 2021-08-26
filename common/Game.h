@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "GameStateDead.h"
 #include "GameStateFinished.h"
+#include "GameStateInit.h"
 #include "GameStateLevel.h"
 #include "Renderer.h"
 #include "Sound.h"
@@ -18,6 +19,7 @@ class Input;
 class Game {
 public:
     GameState *_current_state;
+    GameStateInit *_state_init;
     GameStateLevel *_state_level;
     GameStateDead *_state_dead;
     GameStateFinished *_state_finished;

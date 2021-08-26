@@ -29,6 +29,7 @@ add_executable(emulator
     ../common/GameStateLevel.cc
     ../common/GameStateDead.cc
     ../common/GameStateFinished.cc
+    ../common/GameStateInit.cc
     ../common/Sound.cc
     ../common/Entity.cc
     ../common/Player.cc
