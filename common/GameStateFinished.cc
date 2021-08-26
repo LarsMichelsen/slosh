@@ -21,7 +21,8 @@ void GameStateFinished::next_state() {
 }
 
 void GameStateFinished::tick() {
-    _sound->play_level_finished(1000, get_ms() - _start_time);
+    _sound->play_level_finished(get_ms() - _start_time);
+
     _renderer->tick();
 
     ms duration = get_ms() - _start_time;
