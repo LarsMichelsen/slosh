@@ -19,9 +19,10 @@ GameStateLevel::~GameStateLevel() {
 }
 
 void GameStateLevel::enter() {
-    if (!_player->is_spawned()) reload_level();
     if (_mark_finished)
         _level = load_level(_level + 1);  // Descend to next level
+    else if (!_player->is_spawned())
+        reload_level();
 }
 void GameStateLevel::exit() { despawn(); }
 
@@ -51,9 +52,9 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
     switch (level) {
         case 1:
             _player->spawn(0);
-            _enemies[0].spawn(100)->moving(Movement::None);
-            _enemies[1].spawn(500)->moving(Movement::None);
-            _enemies[2].spawn(800)->moving(Movement::None);
+            _enemies[0].spawn(100);
+            _enemies[1].spawn(500);
+            _enemies[2].spawn(800);
             return level;
         case 2:
             _player->spawn(0);
@@ -77,9 +78,9 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
         case 0:
         default:
             _player->spawn(0);
-            _enemies[0].spawn(30)->moving(Movement::None);
-            _enemies[1].spawn(50)->moving(Movement::UpAndDown, 10);
-            _enemies[2].spawn(300)->moving(Movement::None);
+            //_enemies[0].spawn(30);
+            //_enemies[1].spawn(50)->moving(Movement::UpAndDown, 10);
+            _enemies[0].spawn(300);
             return 0;
     }
 }
