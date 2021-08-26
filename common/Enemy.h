@@ -17,8 +17,8 @@ enum Movement {
 class Enemy : public Entity {
 private:
     Movement _movement = Movement::None;
-    const static uint8_t _move_delay = 60;
-    uint16_t _next_move;
+    ms _move_delay = 60;
+    ms _next_move;
     pos_t _spawn_position;
 
     // Movement::BackAndForth specific
@@ -32,8 +32,10 @@ public:
     virtual void tick() override;
     virtual void show(Renderer *renderer) override;
     virtual void die() override;
-    void spawn(pos_t pos, Movement movement);
     void move();
+
+    Enemy *spawn(pos_t pos);
+    Enemy *moving(Movement movement, ms move_delay = 60);
 
     void touches(Player *player) override;
 };

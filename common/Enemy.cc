@@ -7,9 +7,15 @@ Enemy::Enemy(GameStateLevel *level) : Entity(level) {
     init_movement(Movement::None);
 }
 
-void Enemy::spawn(pos_t pos, Movement movement) {
+Enemy *Enemy::spawn(pos_t pos) {
     Entity::spawn(pos);
+    return this;
+}
+
+Enemy *Enemy::moving(Movement movement, ms move_delay) {
     init_movement(movement);
+    _move_delay = move_delay;
+    return this;
 }
 
 // When setting a new movement mode, all movement related state vars need to
