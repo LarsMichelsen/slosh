@@ -9,7 +9,7 @@ Game::Game(Renderer *renderer, Input *input, Sound *sound)
       _state_init(new GameStateInit(renderer, input, sound, this)),
       _state_dead(new GameStateDead(renderer, input, sound, this)),
       _state_finished(new GameStateFinished(renderer, input, sound, this)) {
-    _current_state = _state_init;
+    set_state(_state_init);
 }
 
 void Game::tick() {
@@ -18,7 +18,7 @@ void Game::tick() {
 }
 
 void Game::set_state(GameState *state) {
-    _current_state->exit();
+    if (_current_state) _current_state->exit();
     _current_state = state;
     _current_state->enter();
 }

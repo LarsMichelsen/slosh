@@ -18,7 +18,7 @@ class Input;
 // are done.
 class Game {
 public:
-    GameState *_current_state;
+    GameState *_current_state = 0;
     GameStateInit *_state_init;
     GameStateLevel *_state_level;
     GameStateDead *_state_dead;
