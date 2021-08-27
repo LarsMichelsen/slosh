@@ -11,7 +11,10 @@
 
 #include "stdint.h"
 
-#define MS_PER_TICK 16  // ~ 63 fps
+// The board currently makes ~50 fps max with the current
+// LEDs. Apply this as cap to also make the emulator use
+// a similar frame rate.
+#define MS_PER_TICK 20
 
 #define WORLD_MIN (uint16_t)0
 #define WORLD_MAX (uint16_t)999

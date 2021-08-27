@@ -16,8 +16,8 @@ GameStateInit::GameStateInit(Renderer *renderer, Input *input, Sound *sound,
 GameStateInit::~GameStateInit() {}
 
 void GameStateInit::enter() {
-    _start_time = get_ms();
-    _phase_start_time = get_ms();
+    _phase = 0;
+    _start_time = _phase_start_time = get_ms();
     _ship_pos = NUM_LEDS - 1;
     _finished = false;
 }
@@ -28,21 +28,20 @@ void GameStateInit::next_state() {
 }
 
 void GameStateInit::tick() {
-    ms now = get_ms();
-    ms duration = now - _start_time;
-    ms phase_duration = now - _phase_start_time;
-
-    _sound->play_game_init(duration);
+    ms phase_duration = get_ms() - _phase_start_time;
 
     // First 3 flashes of the last LED
     if (_phase == 0) {
+        _sound->play_game_init_phase0(phase_duration);
+
         if ((phase_duration >= 0 && phase_duration < 50) ||
             (phase_duration >= 150 && phase_duration < 200) ||
-            (phase_duration >= 300 && phase_duration < 350))
+            (phase_duration >= 300 && phase_duration < 350)) {
             _renderer->set_led(NUM_LEDS - 1, 255, 64, 0);
-        else
+        } else {
             _renderer->set_led(NUM_LEDS - 1, 0, 0, 0);
-        if (duration < 450) return;
+        }
+        if (phase_duration < 450) return;
         _phase = 1;
         _phase_start_time = get_ms();
         phase_duration = 0;
@@ -50,6 +49,8 @@ void GameStateInit::tick() {
 
     // Move the players spaceship down to the spawn
     if (_phase == 1) {
+        _sound->play_game_init_phase1(phase_duration);
+
         // Create a flickering tail
         for (pos_t j = _ship_pos >= 0 ? _ship_pos : 0; j < _ship_pos + 40; j++)
             if (random8(10) > 5) _renderer->fade_to_black(j, 64);
@@ -65,17 +66,15 @@ void GameStateInit::tick() {
     }
 
     // Visualize the impact
+    _phase = 2;
     if (_phase == 2) {
-        if ((phase_duration >= 0 && phase_duration < 50) ||
-            (phase_duration >= 150 && phase_duration < 200) ||
-            (phase_duration >= 300 && phase_duration < 350)) {
-            for (uint8_t i = 0; i < 16; i += i + 1 * 2)
-                if (random8(10) > 2) _renderer->set_led(i, 255, 64, 0);
-        } else {
-            for (uint8_t i = 0; i < 16; i += i + 1 * 2)
-                _renderer->set_led(i, 0, 0, 0);
+        _sound->play_game_init_phase2(phase_duration);
+
+        for (uint8_t i = 0; i < 16; i++) {
+            if (random8(10) > 5) _renderer->set_led(i, 255, 30, 0);
+            if (random8(10) > 3) _renderer->set_led(i, 0, 0, 0);
         }
-        if (duration < 450) return;
+        if (phase_duration < 450) return;
         _phase = 3;
     }
 

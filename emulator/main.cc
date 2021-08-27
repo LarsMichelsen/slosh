@@ -34,6 +34,8 @@ int main(int argc, char *argv[]) {
             std::this_thread::sleep_for(wait_for);
             elapsed = std::chrono::system_clock::now() - start;
         }
+
+        // debug << "Current FPS: " << (1.0f / elapsed.count()) << "\n";
     }
     return 0;
 }

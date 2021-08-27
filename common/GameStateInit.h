@@ -9,7 +9,7 @@ private:
     bool _finished;
     ms _start_time;
     ms _phase_start_time;
-    uint8_t _phase = 0;
+    uint8_t _phase;
     int16_t _ship_pos;
 
 public:

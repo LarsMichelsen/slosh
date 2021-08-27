@@ -22,5 +22,7 @@ public:
     void play_enemy_died();
     void play_player_died(ms passed);
     void play_level_finished(ms passed);
-    void play_game_init(ms passed);
+    void play_game_init_phase0(ms passed);
+    void play_game_init_phase1(ms passed);
+    void play_game_init_phase2(ms passed);
 };
