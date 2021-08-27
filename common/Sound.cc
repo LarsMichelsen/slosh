@@ -17,6 +17,11 @@ void Sound::play_level_finished(ms passed) {
     play_melody(melody, sizeof(melody) / sizeof(Note), 100, passed);
 }
 
+void Sound::play_game_init(ms passed) {
+    Note melody[] = {{1046, 4}, {1175, 4}, {1046, 4}, {1762, 8}};
+    play_melody(melody, sizeof(melody) / sizeof(Note), 100, passed);
+}
+
 void Sound::play_melody(Note* melody, uint8_t num_notes, uint8_t note_duration,
                         ms passed) {
     uint16_t index = passed / note_duration;

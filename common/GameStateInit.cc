@@ -17,6 +17,8 @@ GameStateInit::~GameStateInit() {}
 
 void GameStateInit::enter() {
     _start_time = get_ms();
+    _phase_start_time = get_ms();
+    _ship_pos = NUM_LEDS - 1;
     _finished = false;
 }
 void GameStateInit::exit() {}
@@ -26,42 +28,56 @@ void GameStateInit::next_state() {
 }
 
 void GameStateInit::tick() {
-    _renderer->tick();
+    ms now = get_ms();
+    ms duration = now - _start_time;
+    ms phase_duration = now - _phase_start_time;
+
+    _sound->play_game_init(duration);
 
     // First 3 flashes of the last LED
-    for (uint8_t i = 0; i < 3; i++) {
-        _renderer->set_led(NUM_LEDS - 1, 255, 64, 0);
-        _renderer->show();
-        sleep_for(50);
-        _renderer->set_led(NUM_LEDS - 1, 0, 0, 0);
-        _renderer->show();
-        sleep_for(100);
+    if (_phase == 0) {
+        if ((phase_duration >= 0 && phase_duration < 50) ||
+            (phase_duration >= 150 && phase_duration < 200) ||
+            (phase_duration >= 300 && phase_duration < 350))
+            _renderer->set_led(NUM_LEDS - 1, 255, 64, 0);
+        else
+            _renderer->set_led(NUM_LEDS - 1, 0, 0, 0);
+        if (duration < 450) return;
+        _phase = 1;
+        _phase_start_time = get_ms();
+        phase_duration = 0;
     }
 
     // Move the players spaceship down to the spawn
-    for (int16_t i = NUM_LEDS - 1; i > -40; i--) {
+    if (_phase == 1) {
         // Create a flickering tail
-        for (pos_t j = i >= 0 ? i : 0; j < i + 40; j++)
+        for (pos_t j = _ship_pos >= 0 ? _ship_pos : 0; j < _ship_pos + 40; j++)
             if (random8(10) > 5) _renderer->fade_to_black(j, 64);
-        _renderer->set_led(i + 40, 0, 0, 0);  // Ensure the tail max length
-        _renderer->set_led(i - 1, 255, 200, 200);
-        _renderer->set_led(i, 255, 64, 0);
-        _renderer->show();
+        _renderer->set_led(_ship_pos + 40, 0, 0,
+                           0);  // Ensure the tail max length
+        _renderer->set_led(_ship_pos + 1, 255, 64, 0);
+        _renderer->set_led(_ship_pos, 255, 200, 200);
+        _ship_pos -= 1;
+        if (_ship_pos >= -20) return;
+        _phase = 2;
+        _phase_start_time = get_ms();
+        phase_duration = 0;
     }
 
     // Visualize the impact
-    for (uint8_t i = 0; i < 3; i++) {
-        for (uint8_t i = 0; i < 16; i += i + 1 * 2)
-            if (random8(10) > 2) _renderer->set_led(i, 255, 64, 0);
-        _renderer->show();
-        sleep_for(50);
-        for (uint8_t i = 0; i < 16; i += i + 1 * 2)
-            _renderer->set_led(i, 0, 0, 0);
-        _renderer->show();
-        sleep_for(100);
+    if (_phase == 2) {
+        if ((phase_duration >= 0 && phase_duration < 50) ||
+            (phase_duration >= 150 && phase_duration < 200) ||
+            (phase_duration >= 300 && phase_duration < 350)) {
+            for (uint8_t i = 0; i < 16; i += i + 1 * 2)
+                if (random8(10) > 2) _renderer->set_led(i, 255, 64, 0);
+        } else {
+            for (uint8_t i = 0; i < 16; i += i + 1 * 2)
+                _renderer->set_led(i, 0, 0, 0);
+        }
+        if (duration < 450) return;
+        _phase = 3;
     }
-
-    sleep_for(10);
 
     _finished = true;
 }

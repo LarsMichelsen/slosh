@@ -8,6 +8,9 @@ class GameStateInit final : public GameState {
 private:
     bool _finished;
     ms _start_time;
+    ms _phase_start_time;
+    uint8_t _phase = 0;
+    int16_t _ship_pos;
 
 public:
     GameStateInit(Renderer *renderer, Input *input, Sound *sound, Game *game);
