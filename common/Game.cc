@@ -8,7 +8,8 @@ Game::Game(Renderer *renderer, Input *input, Sound *sound)
     : _state_level(new GameStateLevel(renderer, input, sound, this)),
       _state_init(new GameStateInit(renderer, input, sound, this)),
       _state_dead(new GameStateDead(renderer, input, sound, this)),
-      _state_finished(new GameStateFinished(renderer, input, sound, this)) {}
+      _state_finished(new GameStateFinished(renderer, input, sound, this)),
+      _state_won(new GameStateWon(renderer, input, sound, this)) {}
 
 void Game::tick(ms tick_time) {
     // Set intial state - We need to set it here, not in constructor, because

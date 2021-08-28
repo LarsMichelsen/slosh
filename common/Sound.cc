@@ -75,3 +75,5 @@ void Sound::play_melody(Note* melody, uint8_t num_notes, uint8_t note_duration,
     _play_melody_last_index = index;
     play_note(melody[index].tone, note_duration * melody[index].duration / 4);
 }
+
+void Sound::play_game_won(ms passed) {}

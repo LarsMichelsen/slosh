@@ -5,6 +5,7 @@
 #include "GameStateFinished.h"
 #include "GameStateInit.h"
 #include "GameStateLevel.h"
+#include "GameStateWon.h"
 #include "Renderer.h"
 #include "Sound.h"
 #include "utils.h"
@@ -23,6 +24,7 @@ public:
     GameStateLevel *_state_level;
     GameStateDead *_state_dead;
     GameStateFinished *_state_finished;
+    GameStateWon *_state_won;
 
     Game(Renderer *renderer, Input *input, Sound *sound);
     void tick(ms tick_time);
