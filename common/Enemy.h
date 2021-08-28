@@ -34,8 +34,8 @@ public:
     virtual void die() override;
     void move(ms tick_time);
 
-    Enemy *spawn(pos_t pos);
-    Enemy *moving(Movement movement, ms move_delay = 60);
+    void spawn(pos_t pos, Movement movement = Movement::None,
+               ms move_delay = 60);
 
     void touches(Player *player) override;
 };

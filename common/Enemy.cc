@@ -5,25 +5,16 @@
 
 Enemy::Enemy(GameStateLevel *level) : Entity(level) {}
 
-Enemy *Enemy::spawn(pos_t pos) {
+void Enemy::spawn(pos_t pos, Movement movement, ms move_delay) {
     Entity::spawn(pos);
-    // debug << get_position() << "\n";
-    // init_movement(Movement::None);
-    return this;
-}
-
-Enemy *Enemy::moving(Movement movement, ms move_delay) {
     init_movement(movement);
     _move_delay = move_delay;
-    return this;
 }
 
 // When setting a new movement mode, all movement related state vars need to
 // be reinitialized.
 // TODO: Choose a data structure that ensures this is done automatically.
 void Enemy::init_movement(Movement movement) {
-    // debug << _movement << " " << _spawn_position << " " << get_position()
-    //      << "\n";
     _movement = movement;
     _next_move = 0;
     _spawn_position = get_position();
@@ -64,13 +55,13 @@ void Enemy::move(ms tick_time) {
             if (_moving_down) {
                 move_to(pos - 1);
                 if (pos <= _spawn_position - _range || pos - 1 == WORLD_MIN) {
-                    debug << "turn up at " << pos << "\n";
+                    // debug << "turn up at " << pos << "\n";
                     _moving_down = false;
                 }
             } else if (!_moving_down) {
                 move_to(pos + 1);
                 if (pos >= _spawn_position + _range || pos + 1 == WORLD_MAX) {
-                    debug << "turn down at " << pos << "\n";
+                    // debug << "turn down at " << pos << "\n";
                     _moving_down = true;
                 }
             }

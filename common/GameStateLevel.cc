@@ -58,48 +58,48 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             return level;
         case 2:
             _player->spawn(0);
-            _enemies[0].spawn(200)->moving(Movement::UpAndDown);
-            _enemies[1].spawn(400)->moving(Movement::UpAndDown);
-            _enemies[2].spawn(700)->moving(Movement::UpAndDown);
+            _enemies[0].spawn(200, Movement::UpAndDown);
+            _enemies[1].spawn(400, Movement::UpAndDown);
+            _enemies[2].spawn(700, Movement::UpAndDown);
             return level;
         case 3:
             _player->spawn(0);
             _player->spawn(0);
-            _enemies[0].spawn(200)->moving(Movement::UpAndDown);
-            _enemies[1].spawn(800)->moving(Movement::Down);
+            _enemies[0].spawn(200, Movement::UpAndDown);
+            _enemies[1].spawn(800, Movement::Down);
             return level;
         case 4:
             _player->spawn(0);
-            _enemies[0].spawn(200)->moving(Movement::UpAndDown);
-            _enemies[1].spawn(400)->moving(Movement::UpAndDown);
-            _enemies[2].spawn(600)->moving(Movement::Down);
-            _enemies[3].spawn(800)->moving(Movement::Down);
-            _enemies[4].spawn(950)->moving(Movement::Down);
+            _enemies[0].spawn(200, Movement::UpAndDown);
+            _enemies[1].spawn(400, Movement::UpAndDown);
+            _enemies[2].spawn(600, Movement::Down);
+            _enemies[3].spawn(800, Movement::Down);
+            _enemies[4].spawn(950, Movement::Down);
             return level;
         case 5:
-            _enemies[0].spawn(100)->moving(Movement::UpAndDown);
-            _enemies[1].spawn(200)->moving(Movement::Up);
-            _enemies[2].spawn(220)->moving(Movement::Up);
+            _enemies[0].spawn(100, Movement::UpAndDown);
+            _enemies[1].spawn(200, Movement::Up);
+            _enemies[2].spawn(220, Movement::Up);
             _player->spawn(400);
-            _enemies[3].spawn(580)->moving(Movement::Down);
-            _enemies[4].spawn(600)->moving(Movement::Down);
-            _enemies[5].spawn(900)->moving(Movement::UpAndDown);
+            _enemies[3].spawn(580, Movement::Down);
+            _enemies[4].spawn(600, Movement::Down);
+            _enemies[5].spawn(900, Movement::UpAndDown);
             return level;
         case 6:
             _player->spawn(0);
-            _enemies[0].spawn(50)->moving(Movement::Up);
-            _enemies[1].spawn(200)->moving(Movement::UpAndDown);
-            _enemies[2].spawn(210)->moving(Movement::UpAndDown);
-            _enemies[3].spawn(220)->moving(Movement::UpAndDown);
-            _enemies[4].spawn(230)->moving(Movement::UpAndDown);
-            _enemies[5].spawn(240)->moving(Movement::UpAndDown);
-            _enemies[6].spawn(800)->moving(Movement::Down);
+            _enemies[0].spawn(50, Movement::Up);
+            _enemies[1].spawn(200, Movement::UpAndDown);
+            _enemies[2].spawn(210, Movement::UpAndDown);
+            _enemies[3].spawn(220, Movement::UpAndDown);
+            _enemies[4].spawn(230, Movement::UpAndDown);
+            _enemies[5].spawn(240, Movement::UpAndDown);
+            _enemies[6].spawn(800, Movement::Down);
             return level;
         case 0:
         default:
             _player->spawn(0);
             //_enemies[0].spawn(30);
-            //_enemies[1].spawn(50)->moving(Movement::UpAndDown, 10);
+            //_enemies[1].spawn(50, Movement::UpAndDown, 10);
             _enemies[0].spawn(300);
             return 0;
     }
