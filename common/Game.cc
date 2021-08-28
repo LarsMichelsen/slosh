@@ -13,7 +13,7 @@ Game::Game(Renderer *renderer, Input *input, Sound *sound)
 void Game::tick() {
     // Set intial state - We need to set it here, not in constructor, because
     // it is called too early.
-    if (!_current_state) set_state(_state_init);
+    if (!_current_state) set_state(INIT_STATE);
     _current_state->tick();
     _current_state->next_state();
 }

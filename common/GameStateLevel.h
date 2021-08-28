@@ -23,7 +23,7 @@ public:
     Player *_player;
     // Preinitialized objects - Not all are relevant during each level. It
     // depends on the logic of the level to make use of the objects.
-    Enemy _enemies[5];
+    Enemy _enemies[7];
     Exit *_exit;
 
     virtual void enter() override;

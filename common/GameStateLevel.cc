@@ -9,8 +9,8 @@ GameStateLevel::GameStateLevel(Renderer *renderer, Input *input, Sound *sound,
       _player(new Player(this)),
       _exit(new Exit(this)),
       _enemies{Enemy(this), Enemy(this), Enemy(this), Enemy(this),
-               Enemy(this)} {
-    _level = load_level(0);
+               Enemy(this), Enemy(this), Enemy(this)} {
+    _level = load_level(INIT_LEVEL);
 }
 
 GameStateLevel::~GameStateLevel() {
@@ -64,6 +64,7 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             return level;
         case 3:
             _player->spawn(0);
+            _player->spawn(0);
             _enemies[0].spawn(200)->moving(Movement::UpAndDown);
             _enemies[1].spawn(800)->moving(Movement::Down);
             return level;
@@ -74,6 +75,16 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             _enemies[2].spawn(600)->moving(Movement::Down);
             _enemies[3].spawn(800)->moving(Movement::Down);
             _enemies[4].spawn(950)->moving(Movement::Down);
+            return level;
+        case 5:
+            _player->spawn(0);
+            _enemies[0].spawn(50)->moving(Movement::Up);
+            _enemies[1].spawn(200)->moving(Movement::UpAndDown);
+            _enemies[2].spawn(205)->moving(Movement::UpAndDown);
+            _enemies[3].spawn(210)->moving(Movement::UpAndDown);
+            _enemies[4].spawn(215)->moving(Movement::UpAndDown);
+            _enemies[5].spawn(220)->moving(Movement::UpAndDown);
+            _enemies[6].spawn(800)->moving(Movement::Down);
             return level;
         case 0:
         default:

@@ -2,6 +2,10 @@
 
 #include <math.h>
 
+// Some defines to influence the game startup
+#define INIT_STATE _state_init
+#define INIT_LEVEL 0
+
 // For get_ms()
 #ifdef ARDUINO
 #include <Arduino.h>

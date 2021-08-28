@@ -81,8 +81,4 @@ void Enemy::show(Renderer *renderer) {
 }
 
 void Enemy::die() { despawn(); };
-
-void Enemy::touches(Player *player) {
-    debug << "Enemy::touches(Player)\n";
-    player->die();
-};
+void Enemy::touches(Player *player) { player->die(); };
