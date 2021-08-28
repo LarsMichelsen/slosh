@@ -20,6 +20,8 @@ protected:
 public:
     void play_attack(ms passed);
     void play_enemy_died();
+    void play_spawner_died();
+    void play_spawner_spawned_enemy();
     void play_player_died(ms passed);
     void play_level_finished(ms passed);
     void play_game_init_phase0(ms passed);

@@ -8,8 +8,11 @@ GameStateLevel::GameStateLevel(Renderer *renderer, Input *input, Sound *sound,
     : GameState(renderer, input, sound, game),
       _player(new Player(this)),
       _exit(new Exit(this)),
-      _enemies{Enemy(this), Enemy(this), Enemy(this), Enemy(this),
-               Enemy(this), Enemy(this), Enemy(this)} {
+      _enemies{
+          Enemy(this), Enemy(this), Enemy(this), Enemy(this),
+          Enemy(this), Enemy(this), Enemy(this),
+      },
+      _spawners{Spawner(this)} {
     _level = load_level(INIT_LEVEL);
 }
 
@@ -36,6 +39,7 @@ void GameStateLevel::tick(ms tick_time) {
     _input->handle_input(_player);
     _player->tick(tick_time);
     for (auto &enemy : _enemies) enemy.tick(tick_time);
+    for (auto &spawner : _spawners) spawner.tick(tick_time);
     _exit->tick(tick_time);
 
     // Phase 2: Render the objects for the user and write it to the
@@ -44,6 +48,7 @@ void GameStateLevel::tick(ms tick_time) {
 
     _player->show(_renderer);
     for (auto &enemy : _enemies) enemy.show(_renderer);
+    for (auto &spawner : _spawners) spawner.show(_renderer);
     _exit->show(_renderer);
 }
 uint8_t GameStateLevel::load_level(uint8_t level) {
@@ -95,6 +100,10 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             _enemies[5].spawn(240, Movement::UpAndDown);
             _enemies[6].spawn(800, Movement::Down);
             return level;
+        case 7:
+            _player->spawn(0);
+            _spawners[0].spawn(600, 2500, Movement::Down);
+            return level;
         case 0:
         default:
             _player->spawn(0);
@@ -109,13 +118,23 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
 bool GameStateLevel::is_complete() {
     for (auto &enemy : _enemies)
         if (enemy.is_spawned()) return false;
+    for (auto &spawner : _spawners)
+        if (spawner.is_spawned()) return false;
     return true;
+}
+
+// Return an Enemy pointer (or nullptr in case none is unspawned)
+Enemy *GameStateLevel::get_unspawned_enemy() {
+    for (auto &enemy : _enemies)
+        if (!enemy.is_spawned()) return &enemy;
+    return nullptr;
 }
 
 void GameStateLevel::despawn() {
     // Despawn everything
     _player->despawn();
     for (auto &enemy : _enemies) enemy.despawn();
+    for (auto &spawner : _spawners) spawner.despawn();
     _exit->despawn();
 }
 

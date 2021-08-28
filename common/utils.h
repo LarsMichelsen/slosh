@@ -4,7 +4,7 @@
 
 // Some defines to influence the game startup
 #define INIT_STATE _state_level
-#define INIT_LEVEL 6
+#define INIT_LEVEL 7
 
 // For get_ms()
 #ifdef ARDUINO

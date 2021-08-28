@@ -8,6 +8,7 @@
 class GameStateLevel;
 class Player;
 class Enemy;
+class Spawner;
 class Exit;
 
 class Entity {
@@ -41,5 +42,6 @@ public:
 
     virtual void touches(Player *player){};
     virtual void touches(Enemy *enemy){};
+    virtual void touches(Spawner *spawner){};
     virtual void touches(Exit *exit){};
 };

@@ -6,6 +6,8 @@ void Sound::play_attack(ms passed) {
 }
 
 void Sound::play_enemy_died() { play_note(1046, 40); }
+void Sound::play_spawner_died() { play_note(1762, 40); }
+void Sound::play_spawner_spawned_enemy() { play_note(494, 40); }
 
 void Sound::play_player_died(ms passed) {
     Note melody[] = {{174, 4}, {87, 4}};

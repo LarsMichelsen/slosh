@@ -4,6 +4,7 @@
 #include "GameState.h"
 #include "Renderer.h"
 #include "Sound.h"
+#include "Spawner.h"
 #include "stdint.h"
 #include "utils.h"
 
@@ -24,6 +25,7 @@ public:
     // Preinitialized objects - Not all are relevant during each level. It
     // depends on the logic of the level to make use of the objects.
     Enemy _enemies[7];
+    Spawner _spawners[1];
     Exit *_exit;
 
     virtual void enter() override;
@@ -35,6 +37,7 @@ public:
 
     ms time();
     bool is_complete();
+    Enemy *get_unspawned_enemy();
     void mark_finished() { _mark_finished = true; };
     void despawn();
 };
