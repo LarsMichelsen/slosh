@@ -76,11 +76,7 @@ void Enemy::move() {
 
 void Enemy::show(Renderer *renderer) {
     if (!is_spawned()) return;
-
-    uint16_t pos = pos_to_led(get_position());
-    renderer->_leds[pos].r = 255;
-    renderer->_leds[pos].g = 0;
-    renderer->_leds[pos].b = 0;
+    renderer->_leds[pos_to_led(get_position())].set_rgb(255, 0, 0);
 }
 
 void Enemy::die() { despawn(); };
