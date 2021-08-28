@@ -16,7 +16,7 @@ private:
 public:
     Spawner(GameStateLevel *level);
     virtual void tick(ms tick_time) override;
-    virtual void show(Renderer *renderer) override;
+    virtual void show(Renderer *renderer, ms tick_time) override;
     virtual void die() override;
     void move();
 

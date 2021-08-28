@@ -6,5 +6,5 @@
 
 class SDLInput final : public Input {
 public:
-    virtual void handle_input(Player *player) override;
+    virtual void handle_input(Player *player, ms tick_time) override;
 };

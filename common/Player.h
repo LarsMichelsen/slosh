@@ -27,15 +27,15 @@ private:
     static const uint8_t _attack_range = 4;
 
     void show_player(Renderer *renderer);
-    void show_attack(Renderer *renderer);
+    void show_attack(Renderer *renderer, ms tick_time);
 
 public:
     Player(GameStateLevel *level);
     virtual void tick(ms tick_time) override;
-    virtual void show(Renderer *renderer) override;
+    virtual void show(Renderer *renderer, ms tick_time) override;
 
-    void move(int8_t direction);
-    void attack(bool wants_to_attack);
+    void move(int8_t direction, ms tick_time);
+    void attack(bool wants_to_attack, ms tick_time);
     bool is_attacking(Entity *entity);
     virtual void die() override;
 

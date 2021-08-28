@@ -35,7 +35,6 @@ public:
     GameStateLevel(Renderer *renderer, Input *input, Sound *sound, Game *game);
     ~GameStateLevel();
 
-    ms time();
     bool is_complete();
     Enemy *get_unspawned_enemy();
     void mark_finished() { _mark_finished = true; };

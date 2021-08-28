@@ -36,7 +36,7 @@ public:
     pos_t get_position() { return _position; };
 
     virtual void tick(ms tick_time) = 0;
-    virtual void show(Renderer *renderer) = 0;
+    virtual void show(Renderer *rendere, ms tick_timer) = 0;
     virtual void die() = 0;
     void move_to(pos_t pos);
 

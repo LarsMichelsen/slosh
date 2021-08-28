@@ -33,7 +33,7 @@ void Spawner::tick(ms tick_time) {
     }
 }
 
-void Spawner::show(Renderer *renderer) {
+void Spawner::show(Renderer *renderer, ms tick_time) {
     if (!is_spawned()) return;
     LED &led = renderer->_leds[pos_to_led(get_position())];
     uint8_t perc_interval = 100 * (_next_spawn - tick_time) / _spawn_interval;

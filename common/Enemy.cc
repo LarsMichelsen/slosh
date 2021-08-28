@@ -71,7 +71,7 @@ void Enemy::move(ms tick_time) {
     }
 }
 
-void Enemy::show(Renderer *renderer) {
+void Enemy::show(Renderer *renderer, ms tick_time) {
     if (!is_spawned()) return;
     renderer->_leds[pos_to_led(get_position())].set_rgb(255, 0, 0);
 }

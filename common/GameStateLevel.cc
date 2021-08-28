@@ -36,7 +36,7 @@ void GameStateLevel::next_state() {
 
 void GameStateLevel::tick(ms tick_time) {
     // Phase 1: Update the game logic.
-    _input->handle_input(_player);
+    _input->handle_input(_player, tick_time);
     _player->tick(tick_time);
     for (auto &enemy : _enemies) enemy.tick(tick_time);
     for (auto &spawner : _spawners) spawner.tick(tick_time);
@@ -46,10 +46,10 @@ void GameStateLevel::tick(ms tick_time) {
     // world representing `_renderer->_leds` data structure.
     _renderer->tick(tick_time);
 
-    _player->show(_renderer);
-    for (auto &enemy : _enemies) enemy.show(_renderer);
-    for (auto &spawner : _spawners) spawner.show(_renderer);
-    _exit->show(_renderer);
+    _player->show(_renderer, tick_time);
+    for (auto &enemy : _enemies) enemy.show(_renderer, tick_time);
+    for (auto &spawner : _spawners) spawner.show(_renderer, tick_time);
+    _exit->show(_renderer, tick_time);
 }
 uint8_t GameStateLevel::load_level(uint8_t level) {
     despawn();
@@ -139,6 +139,3 @@ void GameStateLevel::despawn() {
 }
 
 void GameStateLevel::reload_level() { load_level(_level); }
-
-// Returns the milliseconds since start of the level
-ms GameStateLevel::time() { return get_ms() - _start_time; }

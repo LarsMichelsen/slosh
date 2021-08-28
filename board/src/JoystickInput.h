@@ -10,5 +10,5 @@ private:
 public:
     JoystickInput(const int pin_up, const int pin_down, const int pin_attack_0,
                   const int pin_attack_1);
-    virtual void handle_input(Player *player) override;
+    virtual void handle_input(Player *player, ms tick_time) override;
 };

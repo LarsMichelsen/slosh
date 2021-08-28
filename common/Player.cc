@@ -8,31 +8,30 @@ Player::Player(GameStateLevel *level) : Entity(level) {}
 void Player::tick(ms tick_time) {
     if (!is_spawned()) return;
 
-    if (_attacking.active &&
-        _level->time() - _attacking.since > _attack_duration)
+    if (_attacking.active && tick_time - _attacking.since > _attack_duration)
         _attacking = {false, tick_time};
     if (_attacking.active)
-        _level->_sound->play_attack(_level->time() - _attacking.since);
+        _level->_sound->play_attack(tick_time - _attacking.since);
 }
 
-void Player::show(Renderer *renderer) {
+void Player::show(Renderer *renderer, ms tick_time) {
     if (!is_spawned()) return;
 
     show_player(renderer);
-    show_attack(renderer);
+    show_attack(renderer, tick_time);
 }
 
 void Player::show_player(Renderer *renderer) {
     renderer->set_led(pos_to_led(get_position()), 100, 0, 100);
 }
 
-void Player::show_attack(Renderer *renderer) {
+void Player::show_attack(Renderer *renderer, ms tick_time) {
     if (!_attacking.active) return;
 
     // Make it flicker synchronized with the sound
     uint8_t note_len = 20;
     uint8_t r = 0, g = 0, b = 255;
-    if ((_level->time() - _attacking.since) / note_len % 2 == 0) {
+    if ((tick_time - _attacking.since) / note_len % 2 == 0) {
         g = 255;
         b = 0;
     }
@@ -48,17 +47,16 @@ void Player::show_attack(Renderer *renderer) {
     }
 }
 
-void Player::move(int8_t direction) {
+void Player::move(int8_t direction, ms tick_time) {
     if (!is_spawned()) return;
 
     bool wants_to_move = direction != 0;
-    if (_moving.active != wants_to_move)
-        _moving = {wants_to_move, _level->time()};
+    if (_moving.active != wants_to_move) _moving = {wants_to_move, tick_time};
 
     if (!_moving.active) return;
 
     // Add some acceleration to allow a) exact control and b) fast movement
-    int move_duration = _level->time() - _moving.since;
+    int move_duration = tick_time - _moving.since;
     int speed = _speed;
     if (move_duration < 600) {
         speed = _speed * (150 + move_duration) / 600;
@@ -71,7 +69,7 @@ void Player::move(int8_t direction) {
 void Player::touches(Enemy *enemy) { die(); }
 void Player::touches(Exit *exit) { _level->mark_finished(); }
 
-void Player::attack(bool wants_to_attack) {
+void Player::attack(bool wants_to_attack, ms tick_time) {
     if (!is_spawned()) return;
 
     if (_attacking.active) return;  // Already attacking. Let it finish.
@@ -85,7 +83,7 @@ void Player::attack(bool wants_to_attack) {
     if (!wants_to_attack) return;  // Does not want to attack. Done.
 
     // New attack started
-    _attacking = {true, _level->time()};
+    _attacking = {true, tick_time};
     _wants_to_attack = wants_to_attack;
 }
 

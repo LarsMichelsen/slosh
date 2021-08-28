@@ -1,19 +1,19 @@
 #include "SDLInput.h"
 
-void SDLInput::handle_input(Player *player) {
+void SDLInput::handle_input(Player *player, ms tick_time) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_w:
-                        player->move(1);
+                        player->move(1, tick_time);
                         break;
                     case SDLK_s:
-                        player->move(-1);
+                        player->move(-1, tick_time);
                         break;
                     case SDLK_SPACE:
-                        player->attack(true);
+                        player->attack(true, tick_time);
                         break;
                     case SDLK_ESCAPE:
                         exit(0);
@@ -25,11 +25,11 @@ void SDLInput::handle_input(Player *player) {
             case SDL_KEYUP:
                 switch (event.key.keysym.sym) {
                     case SDLK_SPACE:
-                        player->attack(false);
+                        player->attack(false, tick_time);
                         break;
                     case SDLK_w:
                     case SDLK_s:
-                        player->move(0);
+                        player->move(0, tick_time);
                         break;
                     default:
                         break;
