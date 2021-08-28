@@ -1,10 +1,8 @@
 # Slosh - Minimalistic dungeon crawler 🚦🕹️
 
-## What is this about?
+Have a look at the following twitter thread to get an idea what this is about.
 
-Have a look at the following twitter thread to get an idea:
-
-<blockquote class="twitter-tweet" data-theme="light"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/staycation?src=hash&amp;ref_src=twsrc%5Etfw">#staycation</a> simply rocks! 🤓🎉 building a minimalistic game played with the red clicky joystick on an RGB LED strip. <a href="https://t.co/gERPBq4jbG">pic.twitter.com/gERPBq4jbG</a></p>&mdash; Lars Michelsen (@LarsMichelsen) <a href="https://twitter.com/LarsMichelsen/status/1430218030727024641?ref_src=twsrc%5Etfw">August 24, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-theme="light"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/staycation?src=hash&amp;ref_src=twsrc%5Etfw">#staycation</a> simply rocks! 🤓🎉 building a minimalistic game played with the red clicky joystick on an RGB LED strip. <a href="https://t.co/gERPBq4jbG">pic.twitter.com/gERPBq4jbG</a></p>&mdash; Lars Michelsen (@LarsMichelsen) <a href="https://twitter.com/LarsMichelsen/status/1430218030727024641?ref_src=twsrc%5Etfw">August 24, 2021</a></blockquote>
 
 ## Hardware
 
