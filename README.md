@@ -1,20 +1,24 @@
-# Slosh - Minimalistic one dimensional dungeon crawler
+# Slosh - Minimalistic dungeon crawler 🚦🕹️
 
-This project was inspired by [Twang](https://github.com/Critters/TWANG) and
-[Line Wobbler](https://wobblylabs.com/projects/wobbler).
+## What is this about?
 
-This project uses the same basic concepts:
+Have a look at the following twitter thread to get an idea:
 
-* Minimalistic world: 1 RGB LED strip is the whole playground
-* One joystick to control the player
+<blockquote class="twitter-tweet" data-theme="light"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/staycation?src=hash&amp;ref_src=twsrc%5Etfw">#staycation</a> simply rocks! 🤓🎉 building a minimalistic game played with the red clicky joystick on an RGB LED strip. <a href="https://t.co/gERPBq4jbG">pic.twitter.com/gERPBq4jbG</a></p>&mdash; Lars Michelsen (@LarsMichelsen) <a href="https://twitter.com/LarsMichelsen/status/1430218030727024641?ref_src=twsrc%5Etfw">August 24, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-However, I use a little different components than the other projects I have
-seen so far:
+## Hardware
+
+The minimalistic playground is a *1 RGB LED strip* while the game is controlled with
+a *clicky arcade joystick*.
+
+I used the following components to build the game:
 
 * Arduino Mega
-* 4 concatenated 144 per meter WS2128B strips
+* 4 concatenated 144 per meter WS2128B strips (removed plugs, soldered together)
 * 1 arcade joystick to control the player
-* 1 speaker from broken headphones
+* 1 speaker from broken headphones (an old PC speaker will also work)
+* 5V, 3A power supply (not enough to power on all LEDs at full brightness. But
+  that is not needed at the moment anyway.)
 
 ## Software
 
@@ -32,7 +36,7 @@ The development environment was so far (but should not be limited to that):
 
 * Ubuntu 20.04
 * Clang 10, cmake for the emulator
-* PlatformIO 5.1.1 for the board
+* [PlatformIO](https://platformio.org/) 5.1.1 for the board
 
 ### Build the emulator
 
@@ -40,13 +44,14 @@ First install the prerequisites (on Ubuntu):
 
 ```
 sudo apt install cmake libsdl2-dev g++
+pip3 install -U platformio
 ```
 
 You can then build the emulator like this:
 
 ```
-git clone ...
-cd emulator
+git clone https://github.com/LarsMichelsen/slosh.git
+cd slosh/emulator
 cmake .
 make
 ./emulator
@@ -71,20 +76,38 @@ horizontal axis for triggering the attack.
 
 This project uses `platformio` instead of the Arduino IDE for building the
 board firmware. You should have the `platformio` command available in your
-PATH.
+PATH. Then you should be able to build and upload it with the following
+commands:
 
 ```
-git clone ...
-cd board
+git clone https://github.com/LarsMichelsen/slosh.git
+cd slosh/board
 ./upload
 ```
 
-Future ideas
-------------
+There is also a helper script `./deploy-loop` which continuously runs
+`./upload`, then `./serial`. Once you hit `CTRL+C` while `serial` is running,
+the script starts over with a new build.
 
-* Add multiplayer capabilities with 2nd joystick and other game mode
+## Wiring
 
-License
--------
+The power supply `+` is connected to the Arduino VIN and the LED VIN.
+The board is wired like this:
+
+| PIN | Connected |
+| ----| ----------|
+| 11  | Speaker (as required by [ToneAC](https://github.com/teckel12/arduino-toneac)) |
+| 12  | Speaker |
+| 6   | LED data |
+| 2   | Joystick up |
+| 3   | Joystick down |
+| 4   | Joystick attack 1 |
+| 5   | Joystick attack 2 |
+
+## License
 
 It's the GPLv3. See [LICENSE](LICENSE) file.
+
+## Thanks
+
+This project was inspired by Robin Baumgarten's [Line Wobbler](https://wobblylabs.com/projects/wobbler) and [Twang](https://github.com/Critters/TWANG). Thanks for the inspiration! ✨
