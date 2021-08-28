@@ -9,6 +9,7 @@ Enemy::Enemy(GameStateLevel *level) : Entity(level) {
 
 Enemy *Enemy::spawn(pos_t pos) {
     Entity::spawn(pos);
+    init_movement(Movement::None);
     return this;
 }
 
