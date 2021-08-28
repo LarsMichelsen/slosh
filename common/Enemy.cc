@@ -53,11 +53,14 @@ void Enemy::move() {
     switch (_movement) {
         case Movement::Down:
             move_to(pos - 1);
+            if (pos - 1 == WORLD_MIN) _movement = Movement::Up;
             break;
         case Movement::Up:
             move_to(pos + 1);
+            if (pos + 1 == WORLD_MAX) _movement = Movement::Down;
             break;
         case Movement::UpAndDown:
+            // TODO: Care about WORLD_MIN/WORLD_MAX
             if (_moving_down) {
                 move_to(get_position() - 1);
                 if (pos <= _spawn_position - _range) _moving_down = false;
