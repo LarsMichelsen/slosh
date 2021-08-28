@@ -25,6 +25,6 @@ public:
     GameStateFinished *_state_finished;
 
     Game(Renderer *renderer, Input *input, Sound *sound);
-    void tick();
+    void tick(ms tick_time);
     void set_state(GameState *state);
 };

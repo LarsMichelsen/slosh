@@ -21,7 +21,7 @@ class Renderer {
 public:
     LED _leds[NUM_LEDS];
 
-    void tick() {
+    void tick(ms tick_time) {
         // Clear the logical representation of the map
         for (pos_t i = 0; i < NUM_LEDS; i++) _leds[i].set_rgb(0, 0, 0);
     };

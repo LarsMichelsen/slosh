@@ -27,7 +27,7 @@ public:
     Exit *_exit;
 
     virtual void enter() override;
-    virtual void tick() override;
+    virtual void tick(ms tick_time) override;
     virtual void exit() override;
     virtual void next_state() override;
     GameStateLevel(Renderer *renderer, Input *input, Sound *sound, Game *game);

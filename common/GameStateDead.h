@@ -14,7 +14,7 @@ public:
     ~GameStateDead();
 
     virtual void enter() override;
-    virtual void tick() override;
+    virtual void tick(ms tick_time) override;
     virtual void exit() override;
     virtual void next_state() override;
 };

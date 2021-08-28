@@ -20,7 +20,7 @@ void setup() {
 
 void loop() {
     EVERY_N_MILLISECONDS(MS_PER_TICK) {
-        game.tick();
+        game.tick(get_ms());
         renderer.show();
         // debug << "Current FPS: " << FastLED.getFPS() << "\n";
     }

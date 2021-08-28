@@ -10,11 +10,11 @@ Game::Game(Renderer *renderer, Input *input, Sound *sound)
       _state_dead(new GameStateDead(renderer, input, sound, this)),
       _state_finished(new GameStateFinished(renderer, input, sound, this)) {}
 
-void Game::tick() {
+void Game::tick(ms tick_time) {
     // Set intial state - We need to set it here, not in constructor, because
     // it is called too early.
     if (!_current_state) set_state(INIT_STATE);
-    _current_state->tick();
+    _current_state->tick(tick_time);
     _current_state->next_state();
 }
 

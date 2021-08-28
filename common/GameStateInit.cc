@@ -27,8 +27,8 @@ void GameStateInit::next_state() {
     if (_finished) _game->set_state(_game->_state_level);
 }
 
-void GameStateInit::tick() {
-    ms phase_duration = get_ms() - _phase_start_time;
+void GameStateInit::tick(ms tick_time) {
+    ms phase_duration = tick_time - _phase_start_time;
 
     // First 3 flashes of the last LED
     if (_phase == 0) {
@@ -43,7 +43,7 @@ void GameStateInit::tick() {
         }
         if (phase_duration < 450) return;
         _phase = 1;
-        _phase_start_time = get_ms();
+        _phase_start_time = tick_time;
         phase_duration = 0;
     }
 
@@ -61,7 +61,7 @@ void GameStateInit::tick() {
         _ship_pos -= 1;
         if (_ship_pos >= -20) return;
         _phase = 2;
-        _phase_start_time = get_ms();
+        _phase_start_time = tick_time;
         phase_duration = 0;
     }
 

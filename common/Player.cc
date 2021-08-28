@@ -5,12 +5,12 @@
 
 Player::Player(GameStateLevel *level) : Entity(level) {}
 
-void Player::tick() {
+void Player::tick(ms tick_time) {
     if (!is_spawned()) return;
 
     if (_attacking.active &&
         _level->time() - _attacking.since > _attack_duration)
-        _attacking = {false, _level->time()};
+        _attacking = {false, tick_time};
     if (_attacking.active)
         _level->_sound->play_attack(_level->time() - _attacking.since);
 }

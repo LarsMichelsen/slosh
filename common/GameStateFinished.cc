@@ -20,12 +20,12 @@ void GameStateFinished::next_state() {
     if (_finished) _game->set_state(_game->_state_level);
 }
 
-void GameStateFinished::tick() {
-    _sound->play_level_finished(get_ms() - _start_time);
+void GameStateFinished::tick(ms tick_time) {
+    ms duration = tick_time - _start_time;
+    _sound->play_level_finished(duration);
 
-    _renderer->tick();
+    _renderer->tick(tick_time);
 
-    ms duration = get_ms() - _start_time;
     if (duration > 1000) {
         _finished = true;
         return;

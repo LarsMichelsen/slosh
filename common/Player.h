@@ -31,7 +31,7 @@ private:
 
 public:
     Player(GameStateLevel *level);
-    virtual void tick() override;
+    virtual void tick(ms tick_time) override;
     virtual void show(Renderer *renderer) override;
 
     void move(int8_t direction);

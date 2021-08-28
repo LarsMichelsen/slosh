@@ -29,10 +29,10 @@ private:
 
 public:
     Enemy(GameStateLevel *level);
-    virtual void tick() override;
+    virtual void tick(ms tick_time) override;
     virtual void show(Renderer *renderer) override;
     virtual void die() override;
-    void move();
+    void move(ms tick_time);
 
     Enemy *spawn(pos_t pos);
     Enemy *moving(Movement movement, ms move_delay = 60);

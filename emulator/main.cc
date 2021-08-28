@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 
     while (true) {
         auto start = std::chrono::system_clock::now();
-        game.tick();
+        game.tick(get_ms());
         renderer.show();
         auto end = std::chrono::system_clock::now();
 

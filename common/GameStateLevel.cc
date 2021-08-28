@@ -31,16 +31,16 @@ void GameStateLevel::next_state() {
     if (_mark_finished) _game->set_state(_game->_state_finished);
 }
 
-void GameStateLevel::tick() {
+void GameStateLevel::tick(ms tick_time) {
     // Phase 1: Update the game logic.
     _input->handle_input(_player);
-    _player->tick();
-    for (auto &enemy : _enemies) enemy.tick();
-    _exit->tick();
+    _player->tick(tick_time);
+    for (auto &enemy : _enemies) enemy.tick(tick_time);
+    _exit->tick(tick_time);
 
     // Phase 2: Render the objects for the user and write it to the
     // world representing `_renderer->_leds` data structure.
-    _renderer->tick();
+    _renderer->tick(tick_time);
 
     _player->show(_renderer);
     for (auto &enemy : _enemies) enemy.show(_renderer);
@@ -89,10 +89,10 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             _player->spawn(0);
             _enemies[0].spawn(50)->moving(Movement::Up);
             _enemies[1].spawn(200)->moving(Movement::UpAndDown);
-            _enemies[2].spawn(205)->moving(Movement::UpAndDown);
-            _enemies[3].spawn(210)->moving(Movement::UpAndDown);
-            _enemies[4].spawn(215)->moving(Movement::UpAndDown);
-            _enemies[5].spawn(220)->moving(Movement::UpAndDown);
+            _enemies[2].spawn(210)->moving(Movement::UpAndDown);
+            _enemies[3].spawn(220)->moving(Movement::UpAndDown);
+            _enemies[4].spawn(230)->moving(Movement::UpAndDown);
+            _enemies[5].spawn(240)->moving(Movement::UpAndDown);
             _enemies[6].spawn(800)->moving(Movement::Down);
             return level;
         case 0:

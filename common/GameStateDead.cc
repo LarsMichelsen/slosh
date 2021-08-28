@@ -20,11 +20,11 @@ void GameStateDead::next_state() {
     if (_finished) _game->set_state(_game->_state_level);
 }
 
-void GameStateDead::tick() {
-    _sound->play_player_died(get_ms() - _start_time);
-    _renderer->tick();
+void GameStateDead::tick(ms tick_time) {
+    ms duration = tick_time - _start_time;
+    _sound->play_player_died(duration);
+    _renderer->tick(tick_time);
 
-    ms duration = get_ms() - _start_time;
     if (duration > 500) {
         _finished = true;
         return;

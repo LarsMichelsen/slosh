@@ -17,7 +17,7 @@ public:
     Sound* _sound;
 
     virtual void enter() = 0;
-    virtual void tick() = 0;
+    virtual void tick(ms tick_time) = 0;
     virtual void exit() = 0;
     virtual void next_state() = 0;
     GameState(Renderer* renderer, Input* input, Sound* sound, Game* game)
