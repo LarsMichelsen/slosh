@@ -104,6 +104,13 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             _player->spawn(0);
             _spawners[0].spawn(600, 2500, Movement::Down);
             return level;
+        case 8:
+            _enemies[0].spawn(200, Movement::Up, 0, 2);
+            _player->spawn(300);
+            _enemies[1].spawn(400, Movement::Down, 0, 2);
+            _enemies[2].spawn(410, Movement::Down, 0, 2);
+            _enemies[3].spawn(440, Movement::Down, 0, 2);
+            return level;
         case 0:
         default:
             _player->spawn(0);

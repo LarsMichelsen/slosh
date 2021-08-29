@@ -18,6 +18,7 @@ class Enemy : public Entity {
 private:
     Movement _movement = Movement::None;
     ms _move_delay = 60;
+    uint8_t _speed = 1;
     ms _next_move;
     pos_t _spawn_position;
 
@@ -35,7 +36,7 @@ public:
     void move(ms tick_time);
 
     void spawn(pos_t pos, Movement movement = Movement::None,
-               ms move_delay = 60);
+               ms move_delay = 60, uint8_t speed = 1);
 
     void touches(Player *player) override;
 };

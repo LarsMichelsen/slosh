@@ -5,10 +5,11 @@
 
 Enemy::Enemy(GameStateLevel *level) : Entity(level) {}
 
-void Enemy::spawn(pos_t pos, Movement movement, ms move_delay) {
+void Enemy::spawn(pos_t pos, Movement movement, ms move_delay, uint8_t speed) {
     Entity::spawn(pos);
     init_movement(movement);
     _move_delay = move_delay;
+    _speed = speed;
 }
 
 // When setting a new movement mode, all movement related state vars need to
@@ -44,22 +45,22 @@ void Enemy::move(ms tick_time) {
     pos_t pos = get_position();
     switch (_movement) {
         case Movement::Down:
-            move_to(pos - 1);
+            move_to(pos - _speed);
             if (pos - 1 == WORLD_MIN) _movement = Movement::Up;
             break;
         case Movement::Up:
-            move_to(pos + 1);
+            move_to(pos + _speed);
             if (pos + 1 == WORLD_MAX) _movement = Movement::Down;
             break;
         case Movement::UpAndDown:
             if (_moving_down) {
-                move_to(pos - 1);
+                move_to(pos - _speed);
                 if (pos <= _spawn_position - _range || pos - 1 == WORLD_MIN) {
                     // debug << "turn up at " << pos << "\n";
                     _moving_down = false;
                 }
             } else if (!_moving_down) {
-                move_to(pos + 1);
+                move_to(pos + _speed);
                 if (pos >= _spawn_position + _range || pos + 1 == WORLD_MAX) {
                     // debug << "turn down at " << pos << "\n";
                     _moving_down = true;
