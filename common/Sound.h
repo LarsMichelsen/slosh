@@ -28,4 +28,8 @@ public:
     void play_game_init_phase0(ms passed);
     void play_game_init_phase1(ms passed);
     void play_game_init_phase2(ms passed);
+    void play_game_won_phase0(ms passed);
+    void play_game_won_phase1(ms passed);
+    void play_game_won_phase2(ms passed);
+    void play_game_won_phase3(ms passed);
 };

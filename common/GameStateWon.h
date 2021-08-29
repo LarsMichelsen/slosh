@@ -20,6 +20,7 @@ private:
     void show_phase1(ms tick_time, ms duration);
     void show_phase2(ms tick_time, ms duration);
     void show_phase3(ms tick_time, ms duration);
+    void show_phase4(ms tick_time, ms duration);
 
 public:
     GameStateWon(Renderer *renderer, Input *input, Sound *sound, Game *game);

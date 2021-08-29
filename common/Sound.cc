@@ -65,6 +65,47 @@ void Sound::play_game_init_phase2(ms passed) {
     play_melody(melody, sizeof(melody) / sizeof(Note), 100, passed);
 }
 
+void Sound::play_game_won_phase0(ms passed) {
+    Note melody[] = {
+        {392, 4}, {330, 8}, {392, 4}, {330, 8}, {440, 4}, {494, 4}, {440, 4},
+        {494, 4}, {523, 4}, {392, 8}, {523, 4}, {392, 8}, {587, 4}, {659, 4},
+    };
+    play_melody(melody, sizeof(melody) / sizeof(Note), 150, passed);
+}
+
+void Sound::play_game_won_phase1(ms passed) {
+    Note melody[] = {
+        {8, 16},  {8, 16},  {8, 16},  {8, 16},  {12, 16}, {12, 16},
+        {12, 16}, {12, 16}, {32, 16}, {32, 16}, {32, 16}, {32, 16},
+        {32, 16}, {32, 16}, {32, 16}, {32, 16}, {32, 16}, {32, 16},
+        {32, 16}, {32, 16}, {32, 16}, {32, 16}, {32, 16}, {32, 16},
+    };
+    play_melody(melody, sizeof(melody) / sizeof(Note), 100, passed);
+}
+
+void Sound::play_game_won_phase2(ms passed) {
+    Note melody[] = {{5274, 16}, {5274, 16}, {7040, 16}, {7902, 16}};
+    play_melody(melody, sizeof(melody) / sizeof(Note), 100, passed);
+}
+
+void Sound::play_game_won_phase3(ms passed) {
+    Note melody[] = {
+        {392, 4}, {330, 8}, {392, 4},  {330, 8}, {440, 4}, {494, 4},
+        {440, 4}, {494, 4}, {523, 4},  {392, 8}, {523, 4}, {392, 8},
+        {587, 4}, {659, 4}, {392, 4},  {330, 8}, {392, 4}, {330, 8},
+        {440, 4}, {494, 4}, {440, 4},  //
+        {494, 4}, {523, 4}, {392, 8},  {523, 4}, {392, 8}, {587, 4},
+        {659, 4}, {392, 4}, {330, 8},  {392, 4}, {330, 8}, {440, 4},
+        {494, 4}, {440, 4}, {494, 4},  {523, 4}, {392, 8}, {523, 4},
+        {392, 8}, {587, 4}, {659, 4},  //
+        {494, 4}, {523, 4}, {392, 8},  {523, 4}, {392, 8}, {587, 4},
+        {659, 4}, {392, 4}, {330, 8},  {392, 4}, {330, 8}, {440, 4},
+        {494, 4}, {440, 4}, {494, 4},  {523, 4}, {392, 8}, {523, 4},
+        {392, 8}, {587, 4}, {659, 16},
+    };
+    play_melody(melody, sizeof(melody) / sizeof(Note), 200, passed);
+}
+
 void Sound::play_melody(Note* melody, uint8_t num_notes, uint8_t note_duration,
                         ms passed) {
     uint16_t index = passed / note_duration;
