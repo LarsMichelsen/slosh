@@ -14,6 +14,8 @@ void sigHandler(int signum) { exit(0); }
 int main(int argc, char *argv[]) {
     signal(SIGINT, sigHandler);
 
+    srand(time(NULL));
+
     SDLRenderer renderer(3840, 90);
     SDLSound sound;
     SDLInput input;
