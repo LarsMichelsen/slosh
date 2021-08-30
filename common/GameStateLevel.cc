@@ -32,6 +32,7 @@ void GameStateLevel::exit() { despawn(); }
 void GameStateLevel::next_state() {
     if (!_player->is_spawned()) _game->set_state(_game->_state_dead);
     if (_mark_finished) _game->set_state(_game->_state_finished);
+    if (_mark_won) _game->set_state(_game->_state_won);
 }
 
 void GameStateLevel::tick(ms tick_time) {
@@ -54,6 +55,7 @@ void GameStateLevel::tick(ms tick_time) {
 uint8_t GameStateLevel::load_level(uint8_t level) {
     despawn();
     _mark_finished = false;
+    _mark_won = false;
     switch (level) {
         case 1:
             _player->spawn(0);

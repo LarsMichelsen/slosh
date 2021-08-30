@@ -15,6 +15,7 @@ class GameStateLevel final : public GameState {
 private:
     uint8_t _level;
     bool _mark_finished;  // Flag for the next tick to change the level
+    bool _mark_won;       // Flag for the next tick to play game won effect
     ms _start_time = get_ms();
 
     void reload_level();
@@ -37,6 +38,9 @@ public:
 
     bool is_complete();
     Enemy *get_unspawned_enemy();
-    void mark_finished() { _mark_finished = true; };
+    void mark_finished() {
+        _mark_finished = true;
+        if (_level == 8) _mark_won = true;
+    };
     void despawn();
 };
