@@ -24,6 +24,7 @@ private:
     Task _moving{.active = false, .since = 0};
 
     static constexpr ms _attack_duration{100};
+    static constexpr ms _attack_delay{50};
     static const uint8_t _attack_range = 4;
 
     void show_player(Renderer *renderer);

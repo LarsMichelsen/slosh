@@ -71,15 +71,15 @@ void Player::touches(Exit *exit) { _level->mark_finished(); }
 
 void Player::attack(bool wants_to_attack, ms tick_time) {
     if (!is_spawned()) return;
-
-    if (_attacking.active) return;  // Already attacking. Let it finish.
-
     if (_wants_to_attack) {
         // Prevent continous attacking. The user needs to release the attack
         // key once before a new attack can be started.
         if (!wants_to_attack) _wants_to_attack = false;
         return;
     }
+    if (_attacking.active) return;  // Already attacking. Let it finish.
+    if (!_attacking.active && tick_time - _attacking.since < _attack_delay)
+        return;                    // Cool down after an attack.
     if (!wants_to_attack) return;  // Does not want to attack. Done.
 
     // New attack started
