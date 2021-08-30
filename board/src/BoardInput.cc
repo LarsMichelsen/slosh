@@ -1,9 +1,9 @@
-#include "JoystickInput.h"
+#include "BoardInput.h"
 
 #include <Arduino.h>
 
-JoystickInput::JoystickInput(const int pin_up, const int pin_down,
-                             const int pin_attack_0, const int pin_attack_1)
+BoardInput::BoardInput(const int pin_up, const int pin_down,
+                       const int pin_attack_0, const int pin_attack_1)
     : _pin_up(pin_up),
       _pin_down(pin_down),
       _pin_attack_0(pin_attack_0),
@@ -14,7 +14,7 @@ JoystickInput::JoystickInput(const int pin_up, const int pin_down,
     pinMode(_pin_attack_1, INPUT_PULLUP);
 }
 
-void JoystickInput::handle_input(Player *player, ms tick_time) {
+void BoardInput::handle_input(Player *player, ms tick_time) {
     int state_up = digitalRead(_pin_up);
     int state_down = digitalRead(_pin_down);
     int state_attack_0 = digitalRead(_pin_attack_0);
