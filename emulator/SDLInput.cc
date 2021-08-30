@@ -1,6 +1,7 @@
 #include "SDLInput.h"
 
-void SDLInput::handle_input(Player *player, ms tick_time) {
+void SDLInput::handle_input(GameStateLevel *level, Player *player,
+                            ms tick_time) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -11,6 +12,9 @@ void SDLInput::handle_input(Player *player, ms tick_time) {
                         break;
                     case SDLK_s:
                         player->move(-1, tick_time);
+                        break;
+                    case SDLK_l:
+                        level->mark_skipped();
                         break;
                     case SDLK_SPACE:
                         player->attack(true, tick_time);

@@ -9,6 +9,7 @@ Game::Game(Renderer *renderer, Input *input, Sound *sound)
       _state_init(new GameStateInit(renderer, input, sound, this)),
       _state_dead(new GameStateDead(renderer, input, sound, this)),
       _state_finished(new GameStateFinished(renderer, input, sound, this)),
+      _state_skipped(new GameStateSkipped(renderer, input, sound, this)),
       _state_won(new GameStateWon(renderer, input, sound, this)) {}
 
 void Game::tick(ms tick_time) {

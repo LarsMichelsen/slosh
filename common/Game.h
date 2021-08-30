@@ -5,6 +5,7 @@
 #include "GameStateFinished.h"
 #include "GameStateInit.h"
 #include "GameStateLevel.h"
+#include "GameStateSkipped.h"
 #include "GameStateWon.h"
 #include "Renderer.h"
 #include "Sound.h"
@@ -24,6 +25,7 @@ public:
     GameStateLevel *_state_level;
     GameStateDead *_state_dead;
     GameStateFinished *_state_finished;
+    GameStateSkipped *_state_skipped;
     GameStateWon *_state_won;
 
     Game(Renderer *renderer, Input *input, Sound *sound);

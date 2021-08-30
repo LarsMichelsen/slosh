@@ -64,6 +64,7 @@ When using the emulator, you use the keyboard for controls:
 | W      | Move up |
 | S      | Move down |
 | SPACE  | Attack |
+| L      | Skip level |
 
 ### Board controls
 
@@ -94,13 +95,14 @@ The board is wired like this:
 
 | PIN | Connected |
 | ----| ----------|
-| 11  | Speaker (as required by [ToneAC](https://github.com/teckel12/arduino-toneac)) |
-| 12  | Speaker |
-| 6   | LED data |
 | 2   | Joystick up |
 | 3   | Joystick down |
 | 4   | Joystick attack 1 |
 | 5   | Joystick attack 2 |
+| 6   | LED data |
+| 7   | Skip level  |
+| 11  | Speaker (as required by [ToneAC](https://github.com/teckel12/arduino-toneac)) |
+| 12  | Speaker |
 
 ## License
 

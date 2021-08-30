@@ -16,9 +16,11 @@ private:
     uint8_t _level;
     bool _mark_finished;  // Flag for the next tick to change the level
     bool _mark_won;       // Flag for the next tick to play game won effect
+    bool _mark_skipped;   // Flag for the next tick to load the next level
     ms _start_time = get_ms();
 
     void reload_level();
+    void load_next_level();
     uint8_t load_level(uint8_t level);
 
 public:
@@ -42,5 +44,6 @@ public:
         _mark_finished = true;
         if (_level == 8) _mark_won = true;
     };
+    void mark_skipped() { _mark_skipped = true; };
     void despawn();
 };

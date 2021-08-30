@@ -9,7 +9,7 @@
 
 BoardRenderer renderer(128);
 BoardSound sound;
-BoardInput input(2, 3, 4, 5);
+BoardInput input(2, 3, 4, 5, 7);
 Game game(&renderer, &input, &sound);
 
 void setup() {

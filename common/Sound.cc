@@ -19,6 +19,11 @@ void Sound::play_level_finished(ms passed) {
     play_melody(melody, sizeof(melody) / sizeof(Note), 100, passed);
 }
 
+void Sound::play_level_skipped(ms passed) {
+    Note melody[] = {{174, 4}, {87, 4}, {41, 2}};
+    play_melody(melody, sizeof(melody) / sizeof(Note), 100, passed);
+}
+
 void Sound::play_game_init_phase0(ms passed) {
     Note melody[] = {
         {36, 4}, {30, 2}, {36, 4}, {41, 2}, {36, 4},

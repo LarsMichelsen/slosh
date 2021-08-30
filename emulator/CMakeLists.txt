@@ -30,6 +30,7 @@ add_executable(emulator
     ../common/GameStateLevel.cc
     ../common/GameStateDead.cc
     ../common/GameStateFinished.cc
+    ../common/GameStateSkipped.cc
     ../common/GameStateInit.cc
     ../common/GameStateWon.cc
     ../common/Sound.cc

@@ -24,6 +24,7 @@ public:
     void play_spawner_spawned_enemy();
     void play_player_died(ms passed);
     void play_level_finished(ms passed);
+    void play_level_skipped(ms passed);
     void play_game_won(ms passed);
     void play_game_init_phase0(ms passed);
     void play_game_init_phase1(ms passed);
