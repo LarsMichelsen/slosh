@@ -5,11 +5,14 @@
 
 Enemy::Enemy(GameStateLevel *level) : Entity(level) {}
 
-void Enemy::spawn(pos_t pos, Movement movement, ms move_delay, uint8_t speed) {
+void Enemy::spawn(pos_t pos, Movement movement, ms move_delay, uint8_t speed,
+                  uint8_t follow_range) {
     Entity::spawn(pos);
     init_movement(movement);
     _move_delay = move_delay;
     _speed = speed;
+    _follow_range = follow_range;
+    _follow_since = 0;
 }
 
 // When setting a new movement mode, all movement related state vars need to
@@ -32,6 +35,7 @@ void Enemy::tick(ms tick_time) {
         _level->_sound->play_enemy_died();
     }
     move(tick_time);
+    follow_player(tick_time);
 }
 
 void Enemy::move(ms tick_time) {
@@ -72,9 +76,32 @@ void Enemy::move(ms tick_time) {
     }
 }
 
+void Enemy::follow_player(ms tick_time) {
+    if (_follow_range == 0) return;  // Following disabled
+    if (distance(_level->_player->get_position(), get_position()) >
+        _follow_range)
+        return;  // Out of range
+
+    if (_level->_player->get_position() >= get_position() &&
+        _movement != Movement::Up) {
+        init_movement(Movement::Up);
+        _follow_since = tick_time;
+    } else if (_movement != Movement::Down) {
+        init_movement(Movement::Down);
+        _follow_since = tick_time;
+    }
+}
+
 void Enemy::show(Renderer *renderer, ms tick_time) {
     if (!is_spawned()) return;
-    renderer->_leds[pos_to_led(get_position())].set_rgb(255, 0, 0);
+    LED &led = renderer->_leds[pos_to_led(get_position())];
+
+    if (_follow_since != 0 && (tick_time - _follow_since) / 500 % 2 == 0) {
+        led.set_rgb(255, 255, 0);
+        return;
+    }
+
+    led.set_rgb(255, 0, 0);
 }
 
 void Enemy::die() { despawn(); };
