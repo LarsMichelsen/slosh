@@ -42,7 +42,7 @@ public:
     Enemy *get_unspawned_enemy();
     void mark_finished() {
         _mark_finished = true;
-        if (_level == 8) _mark_won = true;
+        if (_level == 9) _mark_won = true;
     };
     void mark_skipped() { _mark_skipped = true; };
     void despawn();

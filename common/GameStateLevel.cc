@@ -60,24 +60,27 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
     _mark_skipped = false;
     switch (level) {
         case 1:
+            // Three standing enemies
             _player->spawn(0);
             _enemies[0].spawn(100);
             _enemies[1].spawn(500);
             _enemies[2].spawn(800);
             return level;
         case 2:
+            // Introducing up and down moving enemies
             _player->spawn(0);
             _enemies[0].spawn(200, Movement::UpAndDown);
             _enemies[1].spawn(400, Movement::UpAndDown);
             _enemies[2].spawn(700, Movement::UpAndDown);
             return level;
         case 3:
-            _player->spawn(0);
+            // Mixed movements
             _player->spawn(0);
             _enemies[0].spawn(200, Movement::UpAndDown);
             _enemies[1].spawn(800, Movement::Down);
             return level;
         case 4:
+            // Mixed movements
             _player->spawn(0);
             _enemies[0].spawn(200, Movement::UpAndDown);
             _enemies[1].spawn(400, Movement::UpAndDown);
@@ -86,6 +89,7 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             _enemies[4].spawn(950, Movement::Down);
             return level;
         case 5:
+            // Player spawning in the middle, mixed movements
             _enemies[0].spawn(100, Movement::UpAndDown);
             _enemies[1].spawn(200, Movement::Up);
             _enemies[2].spawn(220, Movement::Up);
@@ -95,6 +99,7 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             _enemies[5].spawn(900, Movement::UpAndDown);
             return level;
         case 6:
+            // Mixed movements
             _player->spawn(0);
             _enemies[0].spawn(50, Movement::Up);
             _enemies[1].spawn(200, Movement::UpAndDown);
@@ -105,10 +110,19 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             _enemies[6].spawn(800, Movement::Down);
             return level;
         case 7:
+            // Introducing spawners
             _player->spawn(0);
             _spawners[0].spawn(600, 2500, Movement::Down);
             return level;
         case 8:
+            // 3 enemies following the player once in range
+            _player->spawn(0);
+            _enemies[0].spawn(200, Movement::UpAndDown, 60, 1, 20);
+            _enemies[1].spawn(400, Movement::UpAndDown, 60, 1, 30);
+            _enemies[2].spawn(600, Movement::UpAndDown, 60, 2, 40);
+            return level;
+        case 9:
+            // Extremely fast enemies
             _enemies[0].spawn(200, Movement::Up, 0, 2);
             _player->spawn(300);
             _enemies[1].spawn(400, Movement::Down, 0, 2);
@@ -117,6 +131,7 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             return level;
         case 0:
         default:
+            // The first enemy
             _player->spawn(0);
             _enemies[0].spawn(300);
             return 0;
