@@ -12,6 +12,13 @@ uint16_t pos_to_led(pos_t pos) {
     return led;
 }
 
+pos_t distance(pos_t pos0, pos_t pos1) {
+    // Please note: Needs to be done before abs() call.
+    // See https://www.arduino.cc/reference/de/language/functions/math/abs/
+    int dist = (int)pos0 - (int)pos1;
+    return abs(dist);
+}
+
 uint32_t start_ms = 0;
 
 // Return miliseconds since board init and on emulator since the first call to

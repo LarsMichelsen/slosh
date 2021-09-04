@@ -30,6 +30,7 @@ typedef uint16_t pos_t;
 uint16_t map_to(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min,
                 uint16_t out_max);
 uint16_t pos_to_led(pos_t pos);
+pos_t distance(pos_t pos0, pos_t pos1);
 
 typedef uint32_t ms;
 

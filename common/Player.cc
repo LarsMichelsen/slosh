@@ -89,12 +89,8 @@ void Player::attack(bool wants_to_attack, ms tick_time) {
 
 // Whether or not the player is hitting the given entity with the attack
 bool Player::is_attacking(Entity *entity) {
-    // Please note: Needs to be done before abs() call.
-    // See https://www.arduino.cc/reference/de/language/functions/math/abs/
-    int dist = (int)get_position() - (int)entity->get_position();
-    // debug << "Attacking " << _attacking.active << "dist " << abs(dist)
-    //      << " range: " << _attack_range << "\n";
-    return _attacking.active && abs(dist) <= _attack_range;
+    return _attacking.active &&
+           distance(get_position(), entity->get_position()) <= _attack_range;
 }
 
 void Player::die() { despawn(); }
