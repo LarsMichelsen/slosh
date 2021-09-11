@@ -14,6 +14,8 @@ class Input;
 class GameStateLevel final : public GameState {
 private:
     uint8_t _level;
+    uint16_t _num_killed_enemies;   // Killed per level
+    uint16_t _num_killed_spawners;  // Killed per level
     bool _mark_finished;  // Flag for the next tick to change the level
     bool _mark_won;       // Flag for the next tick to play game won effect
     bool _mark_skipped;   // Flag for the next tick to load the next level
@@ -22,13 +24,14 @@ private:
     void reload_level();
     void load_next_level();
     uint8_t load_level(uint8_t level);
+    void tick_level(ms tick_time);
 
 public:
     Player *_player;
     // Preinitialized objects - Not all are relevant during each level. It
     // depends on the logic of the level to make use of the objects.
     Enemy _enemies[7];
-    Spawner _spawners[1];
+    Spawner _spawners[2];
     Exit *_exit;
 
     virtual void enter() override;
@@ -44,6 +47,8 @@ public:
         _mark_finished = true;
         if (_level == 9) _mark_won = true;
     };
+    void count_killed_enemies() { _num_killed_enemies++; };
+    void count_killed_spawners() { _num_killed_spawners++; };
     void mark_skipped() { _mark_skipped = true; };
     void despawn();
 };

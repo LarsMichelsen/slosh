@@ -104,5 +104,8 @@ void Enemy::show(Renderer *renderer, ms tick_time) {
     led.set_rgb(255, 0, 0);
 }
 
-void Enemy::die() { despawn(); };
+void Enemy::die() {
+    despawn();
+    _level->count_killed_enemies();
+};
 void Enemy::touches(Player *player) { player->die(); };

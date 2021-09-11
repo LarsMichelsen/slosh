@@ -12,7 +12,7 @@ GameStateLevel::GameStateLevel(Renderer *renderer, Input *input, Sound *sound,
           Enemy(this), Enemy(this), Enemy(this), Enemy(this),
           Enemy(this), Enemy(this), Enemy(this),
       },
-      _spawners{Spawner(this)} {
+      _spawners{Spawner(this), Spawner(this)} {
     _level = load_level(INIT_LEVEL);
 }
 
@@ -42,6 +42,7 @@ void GameStateLevel::tick(ms tick_time) {
     _player->tick(tick_time);
     for (auto &enemy : _enemies) enemy.tick(tick_time);
     for (auto &spawner : _spawners) spawner.tick(tick_time);
+    tick_level(tick_time);
     _exit->tick(tick_time);
 
     // Phase 2: Render the objects for the user and write it to the
@@ -53,8 +54,11 @@ void GameStateLevel::tick(ms tick_time) {
     for (auto &spawner : _spawners) spawner.show(_renderer, tick_time);
     _exit->show(_renderer, tick_time);
 }
+
 uint8_t GameStateLevel::load_level(uint8_t level) {
     despawn();
+    _num_killed_enemies = 0;
+    _num_killed_spawners = 0;
     _mark_finished = false;
     _mark_won = false;
     _mark_skipped = false;
@@ -112,7 +116,7 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
         case 7:
             // Introducing spawners
             _player->spawn(0);
-            _spawners[0].spawn(600, 2500, Movement::Down);
+            _spawners[1].spawn(600, 2500, Movement::Down);
             return level;
         case 8:
             // 3 enemies following the player once in range
@@ -135,6 +139,23 @@ uint8_t GameStateLevel::load_level(uint8_t level) {
             _player->spawn(0);
             _enemies[0].spawn(300);
             return 0;
+    }
+}
+
+// Level specific dynamic logic
+void GameStateLevel::tick_level(ms tick_time) {
+    if (_level == 7) {
+        if (_num_killed_spawners == 1 && !_spawners[0].is_spawned()) {
+            _spawners[0].spawn(400, 2500, Movement::Up);
+        } else if (_num_killed_spawners == 2) {
+            if (!_spawners[0].is_spawned())
+                _spawners[0].spawn(600, 2500, Movement::Down);
+            if (!_spawners[1].is_spawned() && _player->get_position() > 500)
+                _spawners[1].spawn(400, 2500, Movement::Up);
+        } else if (_num_killed_spawners == 4 && !_spawners[0].is_spawned() &&
+                   _player->get_position() > 950) {
+            _spawners[0].spawn(900, 2500, Movement::Up);
+        }
     }
 }
 

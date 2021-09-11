@@ -41,4 +41,7 @@ void Spawner::show(Renderer *renderer, ms tick_time) {
     led.set_rgb(255 * perc_interval / 100, 165 * perc_interval / 100, 0);
 }
 
-void Spawner::die() { despawn(); };
+void Spawner::die() {
+    despawn();
+    _level->count_killed_spawners();
+};
