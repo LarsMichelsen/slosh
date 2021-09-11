@@ -78,6 +78,10 @@ void Enemy::move(ms tick_time) {
 
 void Enemy::follow_player(ms tick_time) {
     if (_follow_range == 0) return;  // Following disabled
+
+    if (is_follow_tick(tick_time))
+        _level->_sound->play_enemy_following(tick_time - _follow_since);
+
     if (distance(_level->_player->get_position(), get_position()) >
         _follow_range)
         return;  // Out of range
@@ -96,12 +100,16 @@ void Enemy::show(Renderer *renderer, ms tick_time) {
     if (!is_spawned()) return;
     LED &led = renderer->_leds[pos_to_led(get_position())];
 
-    if (_follow_since != 0 && (tick_time - _follow_since) / 500 % 2 == 0) {
+    if (is_follow_tick(tick_time)) {
         led.set_rgb(255, 255, 0);
         return;
     }
 
     led.set_rgb(255, 0, 0);
+}
+
+bool Enemy::is_follow_tick(ms tick_time) {
+    return _follow_since != 0 && (tick_time - _follow_since) / 500 % 2 == 0;
 }
 
 void Enemy::die() {

@@ -32,6 +32,7 @@ private:
 
     void init_movement(Movement movement);
     void follow_player(ms tick_time);
+    bool is_follow_tick(ms tick_time);
 
 public:
     Enemy(GameStateLevel *level);

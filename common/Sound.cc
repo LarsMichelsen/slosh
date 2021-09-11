@@ -6,6 +6,9 @@ void Sound::play_attack(ms passed) {
 }
 
 void Sound::play_enemy_died() { play_note(1046, 40); }
+
+void Sound::play_enemy_following(ms passed) { play_note(82, 20); }
+
 void Sound::play_spawner_died() { play_note(1762, 40); }
 void Sound::play_spawner_spawned_enemy() { play_note(494, 40); }
 
